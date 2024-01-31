@@ -18,13 +18,17 @@ html {
 body {
   font-family: "Roboto", sans-serif !important ;
   min-height: 100dvh;
+  width: 100%;
   line-height: 120%;
+  background-color: var(--primary--color--);
+
 }
 
 #app {
   height: 100%;
+  width: 80%;
   margin: 0 auto;
-  background-color: var(--primary--color--);
+  /* background-color: var(--primary--color--); */
 }
 /* ----------------------------------- HEADER ----------------------------------------------------------- */
 
@@ -32,7 +36,7 @@ header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 3rem 40rem;
+  padding: 3rem;
   font-size: 2rem;
   background-color: var(--secondary--color);
   box-shadow: var(--shadow--small);
@@ -64,7 +68,7 @@ main {
 
 .search__bar__container {
   /* border: 1px solid black; */
-  padding: 3rem 40rem;
+  padding: 3rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -116,7 +120,7 @@ main {
 /* ---------------------------- COUNTRIES ----------------------- */
 
 .country__list {
-  padding: 1rem 40rem;
+  padding: 1rem;
   list-style: none;
   /* border: 1px solid black; */
   display: grid;
@@ -126,7 +130,7 @@ main {
 }
 
 .country__list__item {
-  padding: 4rem 8rem;
+  padding: 4rem;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -139,6 +143,16 @@ main {
 }
 
 .country__list__item img {
-  width: 20rem;
-  height: 11rem;
+  /* width: 20rem;
+  height: 11rem; */
+
+  max-width:23rem;
+  max-height:9.5rem;
+  width: auto;
+  height: auto;
+}
+
+.country__list__item h2 {
+  text-align: center;
+  line-height: 120%;
 }
