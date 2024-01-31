@@ -111,3 +111,29 @@ main {
   text-align: center;
   appearance: none;
 }
+
+/* ---------------------------- COUNTRIES ----------------------- */
+
+.country__list {
+  padding: 1rem 40rem;
+  list-style:none;
+  border: 1px solid black;
+  display: grid;
+  grid-template-columns: repeat(3,1fr);
+  gap: var(--spacing--small);
+}
+
+.country__list__item {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background-color: var(--secondary--color);
+  box-shadow: var(--shadow--small);
+  gap: var(--spacing--small);
+}
+
+.country__list__item img {
+  width: 16.5rem;
+  height: 12.5rem;
+}
