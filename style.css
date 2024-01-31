@@ -1,6 +1,7 @@
 :root {
   --primary--color--: #e6e6ff;
   --secondary--color: #fff;
+  --spacing--small: 8px;
 }
 * {
   margin: 0;
@@ -21,19 +22,19 @@ body {
 #app {
   height: 100%;
   margin: 0 auto;
-  border: 1px solid black;
   background-color: #fff;
 }
+/* ----------------------------------- HEADER ----------------------------------------------------------- */
 
 header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 5rem;
-  width: 80%;
+  padding: 3rem 15em;
   margin: 0 auto;
   font-size: 2rem;
   background-color: var(--secondary--color);
+  border-bottom: 1px solid var(--primary--color--);
 }
 
 header svg,
@@ -42,9 +43,36 @@ header img {
   height: 3rem;
 }
 
-.country__app {
-  border: 1px solid black;
+.country__app img {
+  fill: #272727;
+}
+
+.country__app,
+.brightness {
   display: flex;
-  gap: 8px;
+  gap: var(--spacing--small);
   align-items: center;
+  padding: 1rem;
+  cursor: pointer;
+}
+/* ----------------------------------- MAIN ----------------------------------------------------------- */
+main {
+}
+
+.search__bar__container {
+  width: 70%;
+  border: 1px solid black;
+  margin: 0 auto;
+  display: flex;
+  justify-content: space-between;
+}
+
+.search__bar {
+  border: 1px solid black;
+  padding: 2rem 3rem;
+}
+
+.search__bar svg {
+  width: 3rem;
+  height: 3rem;
 }
