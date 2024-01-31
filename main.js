@@ -2,9 +2,9 @@
 
 const brightness = document.querySelector('.brightness')
 const main = document.querySelector('main')
-
+const countryList = document.querySelector('.country__list')
 
 const showCountries = () => {
-    const countries__list = document.createElement('ul')
+    const countries= document.createElement('li')
     
 }
