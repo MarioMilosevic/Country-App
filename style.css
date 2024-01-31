@@ -2,6 +2,7 @@
   --primary--color--: #e6e6ff;
   --secondary--color: #fff;
   --spacing--small: 8px;
+  --shadow--small:rgba(149, 157, 165, 0.2) 0px 8px 24px;
 }
 * {
   margin: 0;
@@ -22,7 +23,7 @@ body {
 #app {
   height: 100%;
   margin: 0 auto;
-  background-color: #fff;
+  background-color: var(--primary--color--);
 }
 /* ----------------------------------- HEADER ----------------------------------------------------------- */
 
@@ -34,7 +35,8 @@ header {
   margin: 0 auto;
   font-size: 2rem;
   background-color: var(--secondary--color);
-  border-bottom: 1px solid var(--primary--color--);
+  box-shadow: var(--shadow--small)
+  /* border-bottom: 1px solid var(--primary--color--); */
 }
 
 header svg,
@@ -57,22 +59,50 @@ header img {
 }
 /* ----------------------------------- MAIN ----------------------------------------------------------- */
 main {
+  height: 100dvh;
 }
 
 .search__bar__container {
   width: 70%;
   border: 1px solid black;
+  padding: 2rem 2.7rem 2rem 2rem;
   margin: 0 auto;
   display: flex;
   justify-content: space-between;
+  align-items: center;
+  background-color: var(--primary--color--);
 }
 
 .search__bar {
-  border: 1px solid black;
-  padding: 2rem 3rem;
+  display: flex;
+  align-items: center;
+  border-radius: 1.6rem;
+  gap: var(--spacing--small);
+background-color: var(--secondary--color);
+padding: 1rem;
+width: 45%;
+box-shadow: var(--shadow--small);
+}
+
+.search__bar input {
+  width: 95%;
+  height: 100%;
+  background-color: var(--secondary--color--);
+  padding: 1rem;
+  border: none;
+  font-size: 1.6rem;
 }
 
 .search__bar svg {
   width: 3rem;
   height: 3rem;
+  background-color: var(--secondary--color--);
+  fill: var(--primary--color--);
+}
+
+.country__region {
+  padding: 1rem;
+  font-size: 1.6rem;
+  box-shadow: var(--shadow--small);
+  border: none;
 }
