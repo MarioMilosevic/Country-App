@@ -33,14 +33,8 @@
 }
 
 .country__list__item img {
-  /* width: 20rem;
-  height: 11rem; */
-
-  max-width: 23rem;
-  max-height: 9.5rem;
-  width: auto;
-  height: auto;
-
+  max-width: 20rem;
+  max-height: 10rem;
   box-shadow: rgba(149, 157, 165, 1) 0px 8px 24px;
 }
 
