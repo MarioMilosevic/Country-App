@@ -1,3 +1,7 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 :root {
   --primary--color--: #e6e6ff;
   --secondary--color: #fff;
@@ -16,12 +20,11 @@ html {
 }
 
 body {
-  font-family: "Roboto", sans-serif !important ;
+  font-family: "Roboto", sans-serif;
   min-height: 100dvh;
   width: 100%;
   line-height: 120%;
   background-color: var(--primary--color--);
-
 }
 
 #app {
@@ -105,7 +108,7 @@ main {
 }
 
 .search__bar input:focus {
-outline-color: var(--primary--color--);
+  outline-color: var(--primary--color--);
 }
 
 .search__bar svg {
@@ -126,16 +129,29 @@ outline-color: var(--primary--color--);
   background-color: var(--secondary--color);
   border-radius: 1.6rem;
   box-shadow: var(--shadow--small);
+  padding: 0.5rem 1rem;
 }
 
 .country__region {
-  padding: 1rem;
+  width: 100%;
   border-radius: 1.6rem;
   font-size: 1.6rem;
   border: none;
   padding: 2rem;
-  text-align: center;
-  appearance: none;
+}
+
+.country__region option {
+  /* padding: 1rem;
+  color: red;
+  background-color: red; */
+}
+
+.country__region:focus {
+  outline: none;
+}
+
+.country__region option:checked {
+  box-shadow: 0 0 10px 100px #1882A8 inset;
 }
 
 /* ---------------------------- COUNTRIES ----------------------- */
@@ -167,10 +183,13 @@ outline-color: var(--primary--color--);
   /* width: 20rem;
   height: 11rem; */
 
-  max-width:23rem;
-  max-height:9.5rem;
+  max-width: 23rem;
+  max-height: 9.5rem;
   width: auto;
   height: auto;
+
+  box-shadow:  rgba(149, 157, 165, 1) 0px 8px 24px;
+
 }
 
 .country__list__item h2 {
