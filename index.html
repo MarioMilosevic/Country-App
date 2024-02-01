@@ -56,7 +56,7 @@
             class="search__bar flex items-center rounded-3xl bg-white h-[5rem] w-[45%] shadow-md relative"
           >
             <input
-              class="w-full h-full bg-white absolute pl-[4.5rem] border-none rounded-3xl text-lg focus:ring-blue-500"
+              class="w-full h-full bg-white pl-[4.5rem] border-none rounded-3xl text-lg focus:outline-primary"
               type="text"
               placeholder="Search for a country..."
               id="country__search"
@@ -67,7 +67,7 @@
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="w-6 h-6"
+              class="h-full w-12 absolute top-0 left-[2%]"
             >
               <path
                 stroke-linecap="round"
@@ -76,11 +76,19 @@
               />
             </svg>
           </div>
-          <div class="continents__select">
+          <!-- .continents__select {
+                background-color: var(--secondary--color);
+                border-radius: 1.6rem;
+                box-shadow: var(--shadow--small);
+                padding: 0.5rem 1rem;
+} -->
+          <div
+            class="continents__select bg-white rounded-3xl shadow-md px-3 py-4"
+          >
             <select
               name="country__region"
               id="country__region"
-              class="country__region"
+              class="country__region text-lg focus:outline-none"
             >
               <option value="All">All</option>
               <option value="Africa">Africa</option>
@@ -93,7 +101,8 @@
             </select>
           </div>
         </div>
-        <ul class="country__list"></ul>
+ 
+        <ul class="country__list p-4 list-none grid grid-cols-3 gap-3 bg-primary"></ul>
       </main>
     </div>
     <script type="module" src="/main.js"></script>

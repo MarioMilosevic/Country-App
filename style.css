@@ -16,65 +16,8 @@
 }
 
 
-
-/* .search__bar input:focus {
-  outline-color: var(--primary--color--);
-} */
-
-.search__bar svg {
-  width: 3rem;
-  height: 3rem;
-  position: absolute;
-  top: 0;
-  left: 1%;
-  height: 100%;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  /* background-color: var(--secondary--color--);
-  fill: var(--primary--color--); */
-}
-
-.continents__select {
-  background-color: var(--secondary--color);
-  border-radius: 1.6rem;
-  box-shadow: var(--shadow--small);
-  padding: 0.5rem 1rem;
-}
-
-.country__region {
-  width: 100%;
-  border-radius: 1.6rem;
-  font-size: 1.6rem;
-  border: none;
-  padding: 2rem;
-}
-
-.country__region option {
-  /* padding: 1rem;
-  color: red;
-  background-color: red; */
-}
-
-.country__region:focus {
-  outline: none;
-}
-
-.country__region option:checked {
-  box-shadow: 0 0 10px 100px #1882a8 inset;
-}
-
 /* ---------------------------- COUNTRIES ----------------------- */
 
-.country__list {
-  padding: 1rem;
-  list-style: none;
-  /* border: 1px solid black; */
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--spacing--medium);
-  background-color: var(--primary--color--);
-}
 
 .country__list__item {
   padding: 4rem;
