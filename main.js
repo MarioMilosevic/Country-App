@@ -1,6 +1,6 @@
 "use strict";
 import { showCountries } from "./helperFunctions/helperFunctions";
-
+import { Countries } from "./Classes/Countries";
 //  https://restcountries.com/v3.1/all
 const brightness = document.querySelector("#brightness");
 const main = document.querySelector("main");
@@ -19,3 +19,32 @@ countryRegion.addEventListener("change", function () {
   countryList.innerHTML = "";
   findCountry(`https://restcountries.com/v3.1/region/${region}`);
 });
+
+// searchBar.addEventListener("input", function () {
+//   const friends = mainUser.getFriendsArr();
+//   const search = searchBar.value.toLowerCase();
+//   const friend = friends.filter(({ name, lastName }) => {
+//     const fullName = `${name} ${lastName}`.toLowerCase();
+//     return fullName.toLowerCase().includes(search);
+//   });
+//   if (friend) {
+//     findFriend(searchResults, friend);
+//     searchResults.classList.remove("hidden");
+//   }
+//   if (searchBar.value.length === 0) {
+//     searchResults.classList.add("hidden");
+//   }
+// });
+
+
+// export const findFriend = (list, person) => {
+//   list.innerHTML = "";
+//   person.forEach(p => {
+//       const friendDiv = document.createElement("div");
+//       friendDiv.classList.add("friend__search__div");
+//       friendDiv.innerHTML = `<img src="${p.img}">
+//       <p class="person__name">${p.name} ${p.lastName}</p>
+//       `;
+//       list.appendChild(friendDiv);
+//     })
+// };
