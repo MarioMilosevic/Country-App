@@ -14,15 +14,21 @@
     <link rel="stylesheet" href="/style.css" />
     <title>Country App</title>
   </head>
-  <body>
-    <header>
-      <div class="header__container">
-        <div class="country__app">
-          <img src="public/img/planet-earth.svg" alt="planet" />
+  <body class="font-body min-h-screen w-screen leading-[120%] bg-primary">
+    <header
+      class="flex items-center justify-between p-12 text-2xl bg-white shadow-md"
+    >
+      <div class="w-[80%] mx-auto flex justify-between items-center">
+        <div class="country__app flex items-center gap-2 p-4 cursor-pointer">
+          <img
+            class="w-12 h-12"
+            src="public/img/planet-earth.svg"
+            alt="planet"
+          />
           <h1>Country App</h1>
         </div>
 
-        <div class="brightness">
+        <div id="brightness" class="flex items-center gap-2 p-4 cursor-pointer">
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
@@ -41,13 +47,16 @@
         </div>
       </div>
     </header>
-    <div id="app">
-      <main>
-        <div class="search__bar__container">
-          <div class="search__bar">
-            <!-- <label for="country__search"> -->
-            <!-- </label> -->
+    <div id="app" class="h-full w-[80%] mx-auto">
+      <main class="h-full">
+        <div
+          class="search__bar__container p-12 flex items-center justify-between"
+        >
+          <div
+            class="search__bar flex items-center rounded-3xl bg-white h-[5rem] w-[45%] shadow-md relative"
+          >
             <input
+              class="w-full h-full bg-white absolute pl-[4.5rem] border-none rounded-3xl text-lg focus:ring-blue-500"
               type="text"
               placeholder="Search for a country..."
               id="country__search"

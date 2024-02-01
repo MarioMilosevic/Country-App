@@ -2,7 +2,7 @@
 import { showCountries } from "./helperFunctions/helperFunctions";
 
 //  https://restcountries.com/v3.1/all
-const brightness = document.querySelector(".brightness");
+const brightness = document.querySelector("#brightness");
 const main = document.querySelector("main");
 export const countryList = document.querySelector(".country__list");
 const countryRegion = document.querySelector(".country__region");
