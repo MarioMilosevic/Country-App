@@ -14,9 +14,9 @@
     <link rel="stylesheet" href="/style.css" />
     <title>Country App</title>
   </head>
-  <body class="font-body min-h-screen w-screen leading-[120%] bg-primary">
+  <body class="font-body min-h-screen w-screen leading-[120%] bg-primary dark:bg-gray-900 dark:text-white">
     <header
-      class="flex items-center justify-between p-12 text-2xl bg-white shadow-md"
+      class="flex items-center justify-between p-12 text-2xl bg-white shadow-md dark:bg-gray-800"
     >
       <div class="w-[80%] mx-auto flex justify-between items-center">
         <div class="country__app flex items-center gap-2 p-4 cursor-pointer">
@@ -56,7 +56,7 @@
             class="search__bar flex items-center rounded-3xl bg-white h-[5rem] w-[45%] shadow-md relative"
           >
             <input
-              class="w-full h-full bg-white pl-[4.5rem] border-none rounded-3xl text-lg focus:outline-primary"
+              class="w-full h-full bg-white pl-[4.5rem] border-none rounded-3xl text-lg dark:bg-gray-800 focus:outline-primary"
               type="text"
               placeholder="Search for a country..."
               id="country__search"
@@ -67,7 +67,7 @@
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="h-full w-12 absolute top-0 left-[2%]"
+              class="h-full w-12 absolute top-0 left-[2%] "
             >
               <path
                 stroke-linecap="round"
@@ -77,16 +77,16 @@
             </svg>
           </div>
           <div
-            class="continents__select bg-white rounded-3xl shadow-md px-3 py-4"
+            class="continents__select bg-white rounded-2xl shadow-md px-3 py-4"
           >
             <select
               name="country__region"
               id="country__region"
-              class="country__region text-lg focus:outline-none"
+              class="country__region text-lg focus:outline-none dark:bg-gray-800"
             >
               <option value="All">All</option>
               <option value="Africa">Africa</option>
-              <option value="Antarctica">Antarctic</option>
+              <option value="Antarctica">Antartica</option>
               <option value="Asia">Asia</option>
               <option value="Europe">Europe</option>
               <option value="North America">North America</option>
@@ -96,7 +96,7 @@
           </div>
         </div>
  
-        <ul class="country__list p-4 list-none grid grid-cols-3 gap-3 bg-primary"></ul>
+        <ul class="country__list p-4 list-none grid grid-cols-3 gap-3 bg-primary dark:bg-gray-900"></ul>
       </main>
     </div>
     <script type="module" src="/main.js"></script>

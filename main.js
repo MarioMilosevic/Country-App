@@ -46,33 +46,14 @@ countrySearch.addEventListener("input", function () {
   showCountries(searchedCountries);
 });
 
-// searchBar.addEventListener("input", function () {
-//   const friends = mainUser.getFriendsArr();
-//   const search = searchBar.value.toLowerCase();
-// const friend = friends.filter(({ name, lastName }) => {
-//   const fullName = `${name} ${lastName}`.toLowerCase();
-//   return fullName.toLowerCase().includes(search);
-// });
-//   if (friend) {
-//     findFriend(searchResults, friend);
-//     searchResults.classList.remove("hidden");
-//   }
-//   if (searchBar.value.length === 0) {
-//     searchResults.classList.add("hidden");
-//   }
-// });
-
-// export const findFriend = (list, person) => {
-//   list.innerHTML = "";
-//   person.forEach(p => {
-//       const friendDiv = document.createElement("div");
-//       friendDiv.classList.add("friend__search__div");
-//       friendDiv.innerHTML = `<img src="${p.img}">
-//       <p class="person__name">${p.name} ${p.lastName}</p>
-//       `;
-//       list.appendChild(friendDiv);
-//     })
-// };
+brightness.addEventListener('click', function(){
+ document.documentElement.classList.toggle('dark')
+ const liItems = document.querySelectorAll('.country__list__item')
+ liItems.forEach(li => {
+  li.style.backgroundColor = "#1f2937"
+  li.style.shadow = 'none'
+ })
+})
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //  const route = (event) => {

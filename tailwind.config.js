@@ -2,6 +2,7 @@
 const colors = require("tailwindcss/colors");
 export default {
   content: ["./**/*.html", +"./main.js"],
+  darkMode: "class",
   theme: {
     colors: {
       primary: "#e6e6ff",
