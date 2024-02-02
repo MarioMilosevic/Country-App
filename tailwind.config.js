@@ -1,13 +1,12 @@
 /** @type {import('tailwindcss').Config} */
+const colors = require("tailwindcss/colors");
 export default {
-  content: [
-    "./**/*.html",
-  +  "./main.js",
-  ],
+  content: ["./**/*.html", +"./main.js"],
   theme: {
     colors: {
       primary: "#e6e6ff",
       white: "#ffffff",
+      ...colors,
     },
     fontFamily: {
       body: ["Roboto", "sans-serif"],
