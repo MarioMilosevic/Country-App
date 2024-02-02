@@ -2,7 +2,6 @@
 
 export class Countries {
   constructor() {
-    this.allCountries = [];
     this.countries = [];
   }
   addCountries(country) {
@@ -10,14 +9,6 @@ export class Countries {
   }
   setCountries(countries) {
     this.countries = countries;
-  }
-
-  setAllCountries(countries) {
-    this.allCountries = countries;
-  }
-
-  getAllCountries() {
-    return this.allCountries;
   }
 
   getCountries() {
