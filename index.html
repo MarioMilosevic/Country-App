@@ -20,9 +20,9 @@
     >
       <div class="w-[80%] mx-auto flex justify-between items-center">
         <div class="country__app flex items-center gap-2 p-4 cursor-pointer">
-          <img
-            class="w-12 h-12"
-            src="/img/planet-earth.svg"
+          <img id="country__app__logo"
+            class="w-12 h-12 text-red-500 rounded-full"
+            src="./public/img/planet-earth-light.jpg"
             alt="planet"
           />
           <h1>Country App</h1>
@@ -77,7 +77,7 @@
             </svg>
           </div>
           <div
-            class="continents__select bg-white rounded-2xl shadow-md px-3 py-4"
+            class="continents__select bg-white rounded-2xl shadow-md px-3 py-4 dark:bg-gray-800"
           >
             <select
               name="country__region"
