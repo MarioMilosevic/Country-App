@@ -58,7 +58,7 @@ brightness.addEventListener("click", function () {
   const liItems = document.querySelectorAll(".country__list__item");
   liItems.forEach((li) => {
     li.style.backgroundColor = "#1f2937";
-    li.style.shadow = "none";
+    li.firstElementChild.style.boxShadow = "none";
   });
 });
 
