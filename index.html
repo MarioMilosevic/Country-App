@@ -14,36 +14,26 @@
     <link rel="stylesheet" href="/style.css" />
     <title>Country App</title>
   </head>
-  <body class="font-body min-h-screen w-screen leading-[120%] bg-primary dark:bg-gray-900 dark:text-white">
+  <body
+    class="font-body min-h-screen w-screen leading-[120%] bg-primary dark:bg-gray-900 dark:text-white"
+  >
     <header
       class="flex items-center justify-between p-12 text-2xl bg-white shadow-md dark:bg-gray-800"
     >
       <div class="w-[80%] mx-auto flex justify-between items-center">
         <div class="country__app flex items-center gap-2 p-4 cursor-pointer">
-          <img id="country__app__logo"
-            class="w-12 h-12 text-red-500 rounded-full"
+          <img
+            id="country__app__logo"
+            class="w-11 h-11 text-red-500 rounded-full"
             src="./public/img/planet-earth-light.jpg"
             alt="planet"
           />
-          <h1>Country App</h1>
+          <h1 class="text-xlg">Country App</h1>
         </div>
 
         <div id="brightness" class="flex items-center gap-2 p-4 cursor-pointer">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke-width="1.5"
-            stroke="currentColor"
-            class="w-6 h-6"
-          >
-            <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              d="M12 3v2.25m6.364.386-1.591 1.591M21 12h-2.25m-.386 6.364-1.591-1.591M12 18.75V21m-4.773-4.227-1.591 1.591M5.25 12H3m4.227-4.773L5.636 5.636M15.75 12a3.75 3.75 0 1 1-7.5 0 3.75 3.75 0 0 1 7.5 0Z"
-            />
-          </svg>
-          <p>Light Mode</p>
+          <img src="./public/img/sun.jpg" alt="sun" class="w-11 h-11" />
+          <p class="text-xlg">Light Mode</p>
         </div>
       </div>
     </header>
@@ -67,7 +57,7 @@
               viewBox="0 0 24 24"
               stroke-width="1.5"
               stroke="currentColor"
-              class="h-full w-12 absolute top-0 left-[2%] "
+              class="h-full w-12 absolute top-0 left-[2%]"
             >
               <path
                 stroke-linecap="round"
@@ -95,8 +85,10 @@
             </select>
           </div>
         </div>
- 
-        <ul class="country__list p-4 list-none grid grid-cols-3 gap-3 bg-primary dark:bg-gray-900"></ul>
+
+        <ul
+          class="country__list p-4 list-none grid grid-cols-3 gap-3 bg-primary dark:bg-gray-900"
+        ></ul>
       </main>
     </div>
     <script type="module" src="/main.js"></script>

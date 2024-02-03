@@ -4,11 +4,15 @@ import {
   findCountry,
   toggleCountryAppLogo,
   toggleLiBackgroundColor,
+  toggleBrightnessImg,
+  toggleBrightnessText,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
 //  https://restcountries.com/v3.1/all
 const brightness = document.querySelector("#brightness");
+export const brightnessImg = brightness.querySelector("img");
+export const brightnessText = brightness.querySelector("p");
 const main = document.querySelector("main");
 const countrySearch = document.querySelector("#country__search");
 export const countryList = document.querySelector(".country__list");
@@ -59,6 +63,14 @@ brightness.addEventListener("click", function () {
   toggleCountryAppLogo(countryImg);
   const liItems = document.querySelectorAll(".country__list__item");
   toggleLiBackgroundColor(liItems);
+  toggleBrightnessImg();
+  toggleBrightnessText();
+  // ////////////////////////////////////////
+  // const light = "./public/img/sun.jpg";
+  // const dark = "./public/img/moon.png";
+  // brightnessImg.src = darkMode.getDarkMode() ? dark : light
+  // brightnessText.textContent = darkMode.getDarkMode() ? "Dark Mode" : "Light Mode"
+  // img.src = darkMode.getDarkMode() ? darkImg : lightImg;
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
