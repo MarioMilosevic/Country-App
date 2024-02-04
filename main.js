@@ -30,11 +30,11 @@ const fetchedCountries = await findCountry(
 
 countries.setCountries(fetchedCountries);
 countries.sortCountries();
-console.log(fetchedCountries);
 
 showCountries(countries.get24Countries("1").sort());
-
 pageButtons(countries.getCountries(), pageNumbersList);
+
+const liItems = document.querySelectorAll(".country__list__item");
 
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
@@ -45,12 +45,20 @@ countryRegion.addEventListener("change", async () => {
     const responseAll = await findCountry(urlAll);
     countries.setCountries(responseAll);
     showCountries(responseAll);
+    const liItems = document.querySelectorAll(".country__list__item");
+    toggleLiBackgroundColor(liItems);
+    console.log(liItems);
   } else {
+    /////////////////////////////////////////////////////////////////////////////////
     const response = await findCountry(url);
     console.log(response);
+    console.log(darkMode.getDarkMode());
     countries.setCountries(response);
     countries.sortCountries();
     showCountries(response);
+    const liItems = document.querySelectorAll(".country__list__item");
+    console.log(liItems);
+    toggleLiBackgroundColor(liItems);
   }
 });
 
@@ -63,6 +71,9 @@ countrySearch.addEventListener("input", function () {
   );
   console.log(searchedCountries);
   countryList.innerHTML = "";
+  const liItems = document.querySelectorAll(".country__list__item");
+  console.log(liItems);
+  toggleLiBackgroundColor(liItems);
   showCountries(searchedCountries);
 });
 
