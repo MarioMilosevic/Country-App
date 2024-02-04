@@ -7,6 +7,7 @@ import {
   toggleBrightnessImg,
   toggleBrightnessText,
   pageButtons,
+  togglePageNumbersColor,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -30,10 +31,10 @@ const fetchedCountries = await findCountry(
 countries.setCountries(fetchedCountries);
 countries.sortCountries();
 console.log(fetchedCountries);
-window.addEventListener("load", function () {
-  showCountries(countries.get24Countries("1").sort());
-  pageButtons(countries.getCountries(), pageNumbersList);
-});
+
+showCountries(countries.get24Countries("1").sort());
+
+pageButtons(countries.getCountries(), pageNumbersList);
 
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
@@ -48,7 +49,7 @@ countryRegion.addEventListener("change", async () => {
     const response = await findCountry(url);
     console.log(response);
     countries.setCountries(response);
-    countries.sortCountries()
+    countries.sortCountries();
     showCountries(response);
   }
 });
@@ -65,6 +66,12 @@ countrySearch.addEventListener("input", function () {
   showCountries(searchedCountries);
 });
 
+pageNumbersList.addEventListener("click", function (e) {
+  const pageNumber = e.target.innerHTML;
+  countryList.innerHTML = "";
+  showCountries(countries.get24Countries(pageNumber));
+});
+
 brightness.addEventListener("click", function () {
   document.documentElement.classList.toggle("dark");
   darkMode.toggleMode();
@@ -73,12 +80,8 @@ brightness.addEventListener("click", function () {
   toggleLiBackgroundColor(liItems);
   toggleBrightnessImg();
   toggleBrightnessText();
-});
-
-pageNumbersList.addEventListener("click", function (e) {
-  const pageNumber = e.target.innerHTML
-  countryList.innerHTML = "";
-  showCountries(countries.get24Countries(pageNumber));
+  const pageButtons = document.querySelectorAll(".listBtn");
+  togglePageNumbersColor(pageButtons);
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////

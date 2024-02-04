@@ -56,6 +56,13 @@ export const toggleLiBackgroundColor = (arr) => {
   });
 };
 
+export const togglePageNumbersColor = (buttons) => {
+  buttons.forEach(btn => {
+    btn.style.backgroundColor = darkMode.getDarkMode() ? "#1f2937" : "#fff";
+    btn.style.color = darkMode.getDarkMode() ? "#ffffff" : "#000000"
+  })
+}
+
 export const toggleBrightnessImg = () => {
   const light = "./public/img/sun.jpg";
   const dark = "./public/img/moon.png";
