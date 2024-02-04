@@ -25,8 +25,11 @@ const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
 );
 countries.setCountries(fetchedCountries);
-// console.log(fetchedCountries);
-showCountries(countries.getCountries());
+console.log(fetchedCountries);
+window.addEventListener(
+  "load",
+  showCountries(countries.get25Countries("2").sort())
+);
 
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
@@ -65,12 +68,6 @@ brightness.addEventListener("click", function () {
   toggleLiBackgroundColor(liItems);
   toggleBrightnessImg();
   toggleBrightnessText();
-  // ////////////////////////////////////////
-  // const light = "./public/img/sun.jpg";
-  // const dark = "./public/img/moon.png";
-  // brightnessImg.src = darkMode.getDarkMode() ? dark : light
-  // brightnessText.textContent = darkMode.getDarkMode() ? "Dark Mode" : "Light Mode"
-  // img.src = darkMode.getDarkMode() ? darkImg : lightImg;
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -97,3 +94,5 @@ brightness.addEventListener("click", function () {
 // window.onpopstate = handleLocation
 // window.route = route
 // handleLocation()
+
+
