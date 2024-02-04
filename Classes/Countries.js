@@ -23,14 +23,8 @@ export class Countries {
   }
 
   sortCountries() {
-    return this.countries.sort((a, b) => {
-     return a.name.common.localeCompare(b.name.common);
+    this.countries.sort((a, b) => {
+      return a.name.common.localeCompare(b.name.common);
     });
   }
-  //da uzme broj iz argumenta, i asignuje prvi, a taj prvi pomnozi sa drugim
-  //                                  iz argumenta da uzme vrijednost i pomnozi sa 25 tako drugi broj
-  // get25Countries(a) {
-  //   if (a === 1) {
-  //     const first25dArray = this.countries.slice(0, 25);
-  // }
 }

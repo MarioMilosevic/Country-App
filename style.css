@@ -41,3 +41,10 @@
   text-align: center;
   line-height: 120%;
 }
+
+.listBtn {
+  cursor: pointer;
+  background-color: var(--secondary--color);
+  padding: 0.5rem 1rem;
+  border-radius: 0.8rem;
+}

@@ -6,6 +6,7 @@ import {
   toggleLiBackgroundColor,
   toggleBrightnessImg,
   toggleBrightnessText,
+  pageButtons
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -18,14 +19,16 @@ const countrySearch = document.querySelector("#country__search");
 export const countryList = document.querySelector(".country__list");
 const countryRegion = document.querySelector(".country__region");
 const countryImg = document.querySelector("#country__app__logo");
+export const pageNumbersList = document.querySelector('.pageNumbers')
 export const darkMode = new DarkMode();
 export const countries = new Countries();
 
 const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
 );
+
 countries.setCountries(fetchedCountries);
-countries.sortCountries()
+countries.sortCountries();
 console.log(fetchedCountries);
 window.addEventListener(
   "load",
@@ -71,6 +74,11 @@ brightness.addEventListener("click", function () {
   toggleBrightnessText();
 });
 
+
+pageButtons(countries.getCountries(), pageNumbersList)
+
+
+
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //  const route = (event) => {
 //   event = event || window.event
@@ -95,4 +103,5 @@ brightness.addEventListener("click", function () {
 // window.onpopstate = handleLocation
 // window.route = route
 // handleLocation()
+
 

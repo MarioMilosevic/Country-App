@@ -1,5 +1,11 @@
 "use strict";
-import { countryList, darkMode, brightnessImg, brightnessText } from "../main";
+import {
+  countryList,
+  darkMode,
+  brightnessImg,
+  brightnessText,
+  pageNumbersList,
+} from "../main";
 import { countries } from "../main";
 export const showCountries = (arr) => {
   arr.forEach((obj) => {
@@ -10,6 +16,17 @@ export const showCountries = (arr) => {
       `;
     countryList.appendChild(country);
   });
+};
+
+export const pageButtons = (arr, list) => {
+  const length = arr.length;
+  const totalButtons = length / 24;
+  for (let i = 0; i < totalButtons; i++) {
+    const button = document.createElement("button");
+    button.classList.add("listBtn");
+    button.textContent = [i + 1];
+    list.appendChild(button);
+  }
 };
 
 export const findCountry = async function (url) {
