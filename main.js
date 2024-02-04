@@ -25,10 +25,11 @@ const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
 );
 countries.setCountries(fetchedCountries);
+countries.sortCountries()
 console.log(fetchedCountries);
 window.addEventListener(
   "load",
-  showCountries(countries.get25Countries("2").sort())
+  showCountries(countries.get25Countries("1").sort())
 );
 
 countryRegion.addEventListener("change", async () => {
@@ -94,5 +95,4 @@ brightness.addEventListener("click", function () {
 // window.onpopstate = handleLocation
 // window.route = route
 // handleLocation()
-
 
