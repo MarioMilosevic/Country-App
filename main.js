@@ -48,6 +48,7 @@ countryRegion.addEventListener("change", async () => {
     const response = await findCountry(url);
     console.log(response);
     countries.setCountries(response);
+    countries.sortCountries()
     showCountries(response);
   }
 });
@@ -75,8 +76,7 @@ brightness.addEventListener("click", function () {
 });
 
 pageNumbersList.addEventListener("click", function (e) {
-  const target = e.target;
-  const pageNumber = target.innerHTML;
+  const pageNumber = e.target.innerHTML
   countryList.innerHTML = "";
   showCountries(countries.get24Countries(pageNumber));
 });
