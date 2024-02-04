@@ -15,7 +15,7 @@ export class Countries {
     return this.countries;
   }
 
-  get25Countries(input) {
+  get24Countries(input) {
     const b = input * 24;
     const a = b - 24;
     const customArr = this.countries.slice(a, b);

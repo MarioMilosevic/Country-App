@@ -6,7 +6,7 @@ import {
   toggleLiBackgroundColor,
   toggleBrightnessImg,
   toggleBrightnessText,
-  pageButtons
+  pageButtons,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -19,7 +19,7 @@ const countrySearch = document.querySelector("#country__search");
 export const countryList = document.querySelector(".country__list");
 const countryRegion = document.querySelector(".country__region");
 const countryImg = document.querySelector("#country__app__logo");
-export const pageNumbersList = document.querySelector('.pageNumbers')
+export const pageNumbersList = document.querySelector(".pageNumbers");
 export const darkMode = new DarkMode();
 export const countries = new Countries();
 
@@ -30,10 +30,10 @@ const fetchedCountries = await findCountry(
 countries.setCountries(fetchedCountries);
 countries.sortCountries();
 console.log(fetchedCountries);
-window.addEventListener(
-  "load",
-  showCountries(countries.get25Countries("1").sort())
-);
+window.addEventListener("load", function () {
+  showCountries(countries.get24Countries("1").sort());
+  pageButtons(countries.getCountries(), pageNumbersList);
+});
 
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
@@ -74,10 +74,12 @@ brightness.addEventListener("click", function () {
   toggleBrightnessText();
 });
 
-
-pageButtons(countries.getCountries(), pageNumbersList)
-
-
+pageNumbersList.addEventListener("click", function (e) {
+  const target = e.target;
+  const pageNumber = target.innerHTML;
+  countryList.innerHTML = "";
+  showCountries(countries.get24Countries(pageNumber));
+});
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //  const route = (event) => {
@@ -103,5 +105,3 @@ pageButtons(countries.getCountries(), pageNumbersList)
 // window.onpopstate = handleLocation
 // window.route = route
 // handleLocation()
-
-
