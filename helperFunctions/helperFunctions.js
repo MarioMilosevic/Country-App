@@ -97,3 +97,5 @@ export const pageClickedHandler = (target) => {
   target.classList.add("clicked");
   darkMode.getDarkMode() ? lightButton(target) : darkButton(target);
 };
+
+

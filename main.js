@@ -17,7 +17,6 @@ import { DarkMode } from "./Classes/DarkMode";
 const brightness = document.querySelector("#brightness");
 export const brightnessImg = brightness.querySelector("img");
 export const brightnessText = brightness.querySelector("p");
-const main = document.querySelector("main");
 const countrySearch = document.querySelector("#country__search");
 export const countryList = document.querySelector(".country__list");
 const countryRegion = document.querySelector(".country__region");
@@ -73,11 +72,12 @@ countrySearch.addEventListener("input", function () {
   const search = countrySearch.value.toLowerCase();
   const searchedCountries = currentCountries.filter((country) =>
     country.name.common.toLowerCase().includes(search)
+    
   );
   countryList.innerHTML = "";
+  showCountries(searchedCountries);
   const liItems = document.querySelectorAll(".country__list__item");
   toggleLiBackgroundColor(liItems);
-  showCountries(searchedCountries);
 });
 
 pageList.addEventListener("click", function (e) {
@@ -112,13 +112,20 @@ previousPage.addEventListener("click", function () {
   const selectedPageBtn = document.querySelector(".clicked");
   page = Number(selectedPageBtn.id);
   countryList.innerHTML = "";
+
   if (page >= 1) {
     showCountries(countries.get24Countries(page - 1));
+
     selectedPageBtn.classList.remove("clicked");
-    lightButton(selectedPageBtn);
+    darkMode.getDarkMode()
+      ? darkButton(selectedPageBtn)
+      : lightButton(selectedPageBtn);
+
     const previousPageBtn = selectedPageBtn.previousElementSibling;
     previousPageBtn.classList.add("clicked");
-    darkButton(previousPageBtn);
+    darkMode.getDarkMode()
+      ? lightButton(previousPageBtn)
+      : darkButton(previousPageBtn);
     page--;
   }
 });
@@ -127,13 +134,18 @@ nextPage.addEventListener("click", function () {
   const selectedPageBtn = document.querySelector(".clicked");
   page = Number(selectedPageBtn.id);
   countryList.innerHTML = "";
+
   if (page <= pageButtons.length) {
     showCountries(countries.get24Countries(page + 1));
+
     selectedPageBtn.classList.remove("clicked");
-    lightButton(selectedPageBtn);
+    darkMode.getDarkMode()
+      ? darkButton(selectedPageBtn)
+      : lightButton(selectedPageBtn);
+
     const nextPageBtn = selectedPageBtn.nextElementSibling;
     nextPageBtn.classList.add("clicked");
-    darkButton(nextPageBtn);
+    darkMode.getDarkMode() ? lightButton(nextPageBtn) : darkButton(nextPageBtn);
     page++;
   }
 });
