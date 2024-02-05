@@ -30,6 +30,7 @@
   font-size: 1.3rem;
   border-radius: 1.6rem;
   cursor: pointer;
+  transition: all 100ms;
 
 }
 

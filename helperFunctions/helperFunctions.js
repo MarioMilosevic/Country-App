@@ -24,7 +24,8 @@ export const pageButtons = (arr, list) => {
   for (let i = 0; i < totalButtons; i++) {
     const button = document.createElement("button");
     button.classList.add("listBtn");
-    button.textContent = [i + 1];
+    button.id = i + 1
+    button.textContent = i + 1;
     list.appendChild(button);
   }
 };

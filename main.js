@@ -34,7 +34,6 @@ countries.sortCountries();
 showCountries(countries.get24Countries("1").sort());
 pageButtons(countries.getCountries(), pageNumbersList);
 
-const liItems = document.querySelectorAll(".country__list__item");
 
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
@@ -78,9 +77,11 @@ countrySearch.addEventListener("input", function () {
 });
 
 pageNumbersList.addEventListener("click", function (e) {
-  const pageNumber = e.target.innerHTML;
-  countryList.innerHTML = "";
-  showCountries(countries.get24Countries(pageNumber));
+  const pageNumber = e.target.id;
+  if(pageNumber){
+    countryList.innerHTML = "";
+    showCountries(countries.get24Countries(pageNumber));
+  }
 });
 
 brightness.addEventListener("click", function () {
