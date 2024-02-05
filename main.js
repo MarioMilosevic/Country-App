@@ -23,9 +23,11 @@ const countrySearch = document.querySelector("#country__search");
 export const countryList = document.querySelector(".country__list");
 const countryRegion = document.querySelector(".country__region");
 const countryImg = document.querySelector("#country__app__logo");
-export const pageNumbersList = document.querySelector(".pageNumbers");
+export const pageList = document.querySelector(".pageList");
+export const pageNumbers = document.querySelector('.pageNumbers')
 export const darkMode = new DarkMode();
 export const countries = new Countries();
+console.log(pageNumbers);
 
 const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
@@ -35,7 +37,7 @@ countries.setCountries(fetchedCountries);
 countries.sortCountries();
 
 showCountries(countries.get24Countries("1").sort());
-pageButtons(countries.getCountries(), pageNumbersList);
+pageButtons(countries.getCountries(), pageNumbers);
 export const firstPageBtn = document.querySelector(".listBtn");
 firstPageBtn.classList.add("clickedDark");
 
@@ -75,7 +77,7 @@ countrySearch.addEventListener("input", function () {
   showCountries(searchedCountries);
 });
 
-pageNumbersList.addEventListener("click", function (e) {
+pageList.addEventListener("click", function (e) {
   const target = e.target;
   const pageNumber = target.id;
   if (pageNumber && countries.getCountries().length >= 22) {

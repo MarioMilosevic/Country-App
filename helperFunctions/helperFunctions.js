@@ -4,7 +4,6 @@ import {
   darkMode,
   brightnessImg,
   brightnessText,
-  pageNumbersList,
   firstPageBtn
 } from "../main";
 import { countries } from "../main";
