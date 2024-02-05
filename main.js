@@ -38,6 +38,7 @@ countries.sortCountries();
 
 showCountries(countries.get24Countries("1").sort());
 renderPageButtons(countries.getCountries(), pageNumbers);
+/////////////////////////////////////////////////////////
 export const firstPageBtn = document.querySelector(".listBtn");
 const pageButtons = document.querySelectorAll(".listBtn");
 firstPageBtn.classList.add("clickedDark", "clicked");
@@ -59,10 +60,11 @@ countryRegion.addEventListener("change", async () => {
     const response = await findCountry(url);
     countries.setCountries(response);
     countries.sortCountries();
-
     showCountries(countries.get24Countries("1").sort());
+    pageNumbers.innerHTML = "";
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
+    renderPageButtons(response, pageNumbers);
     pageClickedHandler(firstPageBtn);
   }
 });
@@ -72,12 +74,12 @@ countrySearch.addEventListener("input", function () {
   const search = countrySearch.value.toLowerCase();
   const searchedCountries = currentCountries.filter((country) =>
     country.name.common.toLowerCase().includes(search)
-    
   );
   countryList.innerHTML = "";
   showCountries(searchedCountries);
   const liItems = document.querySelectorAll(".country__list__item");
   toggleLiBackgroundColor(liItems);
+  renderPageButtons(searchedCountries, pageNumbers);
 });
 
 pageList.addEventListener("click", function (e) {
@@ -100,7 +102,6 @@ brightness.addEventListener("click", function () {
   toggleLiBackgroundColor(liItems);
   toggleBrightnessImg();
   toggleBrightnessText();
-  // const pageButtons = document.querySelectorAll(".listBtn");
   togglePageNumbersColor(pageButtons);
   const selectedPageBtn = document.querySelector(".clicked");
   darkMode.getDarkMode()
@@ -111,9 +112,8 @@ brightness.addEventListener("click", function () {
 previousPage.addEventListener("click", function () {
   const selectedPageBtn = document.querySelector(".clicked");
   page = Number(selectedPageBtn.id);
-  countryList.innerHTML = "";
-
-  if (page >= 1) {
+  if (page > 1) {
+    countryList.innerHTML = "";
     showCountries(countries.get24Countries(page - 1));
 
     selectedPageBtn.classList.remove("clicked");
@@ -133,9 +133,9 @@ previousPage.addEventListener("click", function () {
 nextPage.addEventListener("click", function () {
   const selectedPageBtn = document.querySelector(".clicked");
   page = Number(selectedPageBtn.id);
-  countryList.innerHTML = "";
 
-  if (page <= pageButtons.length) {
+  if (page < pageButtons.length) {
+    countryList.innerHTML = "";
     showCountries(countries.get24Countries(page + 1));
 
     selectedPageBtn.classList.remove("clicked");
