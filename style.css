@@ -28,13 +28,15 @@
   font-size: 1.3rem;
   border-radius: 1.6rem;
   cursor: pointer;
-  transition: all 500ms;
+  transition: ease-out 500ms;
 }
 
 .country__list__item img {
   max-width: 20rem;
   max-height: 10rem;
   box-shadow: rgba(149, 157, 165, 1) 0px 8px 24px;
+  transition: ease-out 500ms;
+
 }
 .country__list__item h2 {
   text-align: center;

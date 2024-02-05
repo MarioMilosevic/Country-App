@@ -10,11 +10,10 @@ import {
   togglePageNumbersColor,
   darkButton,
   lightButton,
-  pageClickedHandler
+  pageClickedHandler,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
-//  https://restcountries.com/v3.1/all
 const brightness = document.querySelector("#brightness");
 export const brightnessImg = brightness.querySelector("img");
 export const brightnessText = brightness.querySelector("p");
@@ -24,10 +23,12 @@ export const countryList = document.querySelector(".country__list");
 const countryRegion = document.querySelector(".country__region");
 const countryImg = document.querySelector("#country__app__logo");
 export const pageList = document.querySelector(".pageList");
-export const pageNumbers = document.querySelector('.pageNumbers')
+export const pageNumbers = document.querySelector(".pageNumbers");
 export const darkMode = new DarkMode();
 export const countries = new Countries();
-console.log(pageNumbers);
+let page = 0;
+const previousPage = document.querySelector(".previousPage");
+const nextPage = document.querySelector(".nextPage");
 
 const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
@@ -39,7 +40,7 @@ countries.sortCountries();
 showCountries(countries.get24Countries("1").sort());
 pageButtons(countries.getCountries(), pageNumbers);
 export const firstPageBtn = document.querySelector(".listBtn");
-firstPageBtn.classList.add("clickedDark");
+firstPageBtn.classList.add("clickedDark", "clicked");
 
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
@@ -49,19 +50,20 @@ countryRegion.addEventListener("change", async () => {
   if (region === "All") {
     const responseAll = await findCountry(urlAll);
     countries.setCountries(responseAll);
-    countries.sortCountries()
-    showCountries(countries.get24Countries('1').sort());
+    countries.sortCountries();
+    showCountries(countries.get24Countries("1").sort());
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
-    firstPageBtn.classList.add('selected')
+    firstPageBtn.classList.add("selected");
   } else {
     const response = await findCountry(url);
     countries.setCountries(response);
     countries.sortCountries();
-    showCountries(response);
+
+    showCountries(countries.get24Countries("1").sort());
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
-    pageClickedHandler(firstPageBtn)
+    pageClickedHandler(firstPageBtn);
   }
 });
 
@@ -81,7 +83,7 @@ pageList.addEventListener("click", function (e) {
   const target = e.target;
   const pageNumber = target.id;
   if (pageNumber && countries.getCountries().length >= 22) {
-    pageClickedHandler(target)
+    pageClickedHandler(target);
     countryList.innerHTML = "";
     showCountries(countries.get24Countries(pageNumber));
     const liItems = document.querySelectorAll(".country__list__item");
@@ -104,6 +106,23 @@ brightness.addEventListener("click", function () {
     ? lightButton(selectedPageBtn)
     : darkButton(selectedPageBtn);
 });
+
+previousPage.addEventListener("click", function () {
+  const selectedPageBtn = document.querySelector(".clicked");
+  page = Number(selectedPageBtn.id);
+  countryList.innerHTML = "";
+  if (page >= 1) {
+    showCountries(countries.get24Countries(selectedPageBtn.id - 1));
+    selectedPageBtn.classList.remove("clicked");
+    lightButton(selectedPageBtn);
+    const previousPageBtn = selectedPageBtn.previousElementSibling;
+    previousPageBtn.classList.add("clicked");
+    darkButton(previousPageBtn);
+    page--;
+  }
+});
+
+// MORAM RIJESITI BAG, KADA IMAM NPR 60 ZEMALJA, I RENDEROVAO SAM SVIH 60, DA SPRIJECIM DA SE KLIKNE DALJE, JER SE SAMO ISPRAZNI LISTA I OSTANE SVE PRAZNO !!!!!!!!!!!
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //  const route = (event) => {
