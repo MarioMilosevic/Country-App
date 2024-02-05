@@ -10,6 +10,7 @@ import {
   togglePageNumbersColor,
   darkButton,
   lightButton,
+  pageClickedHandler
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -35,7 +36,7 @@ countries.sortCountries();
 
 showCountries(countries.get24Countries("1").sort());
 pageButtons(countries.getCountries(), pageNumbersList);
-const firstPageBtn = document.querySelector(".listBtn");
+export const firstPageBtn = document.querySelector(".listBtn");
 firstPageBtn.classList.add("clickedDark");
 
 countryRegion.addEventListener("change", async () => {
@@ -46,9 +47,11 @@ countryRegion.addEventListener("change", async () => {
   if (region === "All") {
     const responseAll = await findCountry(urlAll);
     countries.setCountries(responseAll);
-    showCountries(responseAll);
+    countries.sortCountries()
+    showCountries(countries.get24Countries('1').sort());
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
+    firstPageBtn.classList.add('selected')
   } else {
     const response = await findCountry(url);
     countries.setCountries(response);
@@ -56,6 +59,7 @@ countryRegion.addEventListener("change", async () => {
     showCountries(response);
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
+    pageClickedHandler(firstPageBtn)
   }
 });
 
@@ -74,16 +78,8 @@ countrySearch.addEventListener("input", function () {
 pageNumbersList.addEventListener("click", function (e) {
   const target = e.target;
   const pageNumber = target.id;
-  if (pageNumber) {
-    firstPageBtn.classList.remove("clickedDark");
-    const allPageBtns = document.querySelectorAll(".listBtn");
-    allPageBtns.forEach((btn) => {
-      btn.classList.remove("clicked");
-      darkMode.getDarkMode() ? darkButton(btn) : lightButton(btn);
-    });
-    target.classList.add("clicked");
-    darkMode.getDarkMode() ? lightButton(target) : darkButton(target);
-
+  if (pageNumber && countries.getCountries().length >= 22) {
+    pageClickedHandler(target)
     countryList.innerHTML = "";
     showCountries(countries.get24Countries(pageNumber));
     const liItems = document.querySelectorAll(".country__list__item");

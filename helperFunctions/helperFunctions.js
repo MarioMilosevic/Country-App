@@ -5,6 +5,7 @@ import {
   brightnessImg,
   brightnessText,
   pageNumbersList,
+  firstPageBtn
 } from "../main";
 import { countries } from "../main";
 export const showCountries = (arr) => {
@@ -79,11 +80,21 @@ export const toggleBrightnessText = () => {
 export const lightButton = (element) => {
   element.style.backgroundColor = "#fff";
   element.style.color = "#000";
-  console.log("svjetlo");
 };
 
 export const darkButton = (element) => {
   element.style.backgroundColor = "#1f2937";
   element.style.color = "#fff";
-  console.log("mrak");
+};
+
+export const pageClickedHandler = (target) => {
+  firstPageBtn.classList.remove("clickedDark");
+  const allPageBtns = document.querySelectorAll(".listBtn");
+  allPageBtns.forEach((btn) => {
+    btn.classList.remove("clicked");
+    darkMode.getDarkMode() ? darkButton(btn) : lightButton(btn);
+  });
+  
+  target.classList.add("clicked");
+  darkMode.getDarkMode() ? lightButton(target) : darkButton(target);
 };

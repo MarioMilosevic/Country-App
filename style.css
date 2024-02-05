@@ -28,7 +28,7 @@
   font-size: 1.3rem;
   border-radius: 1.6rem;
   cursor: pointer;
-  transition: all 100ms;
+  transition: all 500ms;
 }
 
 .country__list__item img {
