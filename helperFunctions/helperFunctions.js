@@ -18,7 +18,7 @@ export const showCountries = (arr) => {
   });
 };
 
-export const pageButtons = (arr, list) => {
+export const renderPageButtons = (arr, list) => {
   const length = arr.length;
   const totalButtons = length / 24;
   for (let i = 0; i < totalButtons; i++) {

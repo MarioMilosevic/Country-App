@@ -6,7 +6,7 @@ import {
   toggleLiBackgroundColor,
   toggleBrightnessImg,
   toggleBrightnessText,
-  pageButtons,
+  renderPageButtons,
   togglePageNumbersColor,
   darkButton,
   lightButton,
@@ -38,8 +38,9 @@ countries.setCountries(fetchedCountries);
 countries.sortCountries();
 
 showCountries(countries.get24Countries("1").sort());
-pageButtons(countries.getCountries(), pageNumbers);
+renderPageButtons(countries.getCountries(), pageNumbers);
 export const firstPageBtn = document.querySelector(".listBtn");
+const pageButtons = document.querySelectorAll(".listBtn");
 firstPageBtn.classList.add("clickedDark", "clicked");
 
 countryRegion.addEventListener("change", async () => {
@@ -99,7 +100,7 @@ brightness.addEventListener("click", function () {
   toggleLiBackgroundColor(liItems);
   toggleBrightnessImg();
   toggleBrightnessText();
-  const pageButtons = document.querySelectorAll(".listBtn");
+  // const pageButtons = document.querySelectorAll(".listBtn");
   togglePageNumbersColor(pageButtons);
   const selectedPageBtn = document.querySelector(".clicked");
   darkMode.getDarkMode()
@@ -112,13 +113,28 @@ previousPage.addEventListener("click", function () {
   page = Number(selectedPageBtn.id);
   countryList.innerHTML = "";
   if (page >= 1) {
-    showCountries(countries.get24Countries(selectedPageBtn.id - 1));
+    showCountries(countries.get24Countries(page - 1));
     selectedPageBtn.classList.remove("clicked");
     lightButton(selectedPageBtn);
     const previousPageBtn = selectedPageBtn.previousElementSibling;
     previousPageBtn.classList.add("clicked");
     darkButton(previousPageBtn);
     page--;
+  }
+});
+
+nextPage.addEventListener("click", function () {
+  const selectedPageBtn = document.querySelector(".clicked");
+  page = Number(selectedPageBtn.id);
+  countryList.innerHTML = "";
+  if (page <= pageButtons.length) {
+    showCountries(countries.get24Countries(page + 1));
+    selectedPageBtn.classList.remove("clicked");
+    lightButton(selectedPageBtn);
+    const nextPageBtn = selectedPageBtn.nextElementSibling;
+    nextPageBtn.classList.add("clicked");
+    darkButton(nextPageBtn);
+    page++;
   }
 });
 
