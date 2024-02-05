@@ -8,6 +8,8 @@ import {
   toggleBrightnessText,
   pageButtons,
   togglePageNumbersColor,
+  darkButton,
+  lightButton,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -33,7 +35,8 @@ countries.sortCountries();
 
 showCountries(countries.get24Countries("1").sort());
 pageButtons(countries.getCountries(), pageNumbersList);
-
+const firstPageBtn = document.querySelector(".listBtn");
+firstPageBtn.classList.add("clickedDark");
 
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
@@ -46,41 +49,45 @@ countryRegion.addEventListener("change", async () => {
     showCountries(responseAll);
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
-    console.log(liItems);
   } else {
-    /////////////////////////////////////////////////////////////////////////////////
     const response = await findCountry(url);
-    console.log(response);
-    console.log(darkMode.getDarkMode());
     countries.setCountries(response);
     countries.sortCountries();
     showCountries(response);
     const liItems = document.querySelectorAll(".country__list__item");
-    console.log(liItems);
     toggleLiBackgroundColor(liItems);
   }
 });
 
 countrySearch.addEventListener("input", function () {
-  console.log("radi");
   const currentCountries = countries.getCountries();
   const search = countrySearch.value.toLowerCase();
   const searchedCountries = currentCountries.filter((country) =>
     country.name.common.toLowerCase().includes(search)
   );
-  console.log(searchedCountries);
   countryList.innerHTML = "";
   const liItems = document.querySelectorAll(".country__list__item");
-  console.log(liItems);
   toggleLiBackgroundColor(liItems);
   showCountries(searchedCountries);
 });
 
 pageNumbersList.addEventListener("click", function (e) {
-  const pageNumber = e.target.id;
-  if(pageNumber){
+  const target = e.target;
+  const pageNumber = target.id;
+  if (pageNumber) {
+    firstPageBtn.classList.remove("clickedDark");
+    const allPageBtns = document.querySelectorAll(".listBtn");
+    allPageBtns.forEach((btn) => {
+      btn.classList.remove("clicked");
+      darkMode.getDarkMode() ? darkButton(btn) : lightButton(btn);
+    });
+    target.classList.add("clicked");
+    darkMode.getDarkMode() ? lightButton(target) : darkButton(target);
+
     countryList.innerHTML = "";
     showCountries(countries.get24Countries(pageNumber));
+    const liItems = document.querySelectorAll(".country__list__item");
+    toggleLiBackgroundColor(liItems);
   }
 });
 
@@ -94,6 +101,10 @@ brightness.addEventListener("click", function () {
   toggleBrightnessText();
   const pageButtons = document.querySelectorAll(".listBtn");
   togglePageNumbersColor(pageButtons);
+  const selectedPageBtn = document.querySelector(".clicked");
+  darkMode.getDarkMode()
+    ? lightButton(selectedPageBtn)
+    : darkButton(selectedPageBtn);
 });
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////

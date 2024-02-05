@@ -15,9 +15,7 @@
   box-sizing: border-box;
 }
 
-
 /* ---------------------------- COUNTRIES ----------------------- */
-
 
 .country__list__item {
   padding: 3rem 2rem;
@@ -31,7 +29,6 @@
   border-radius: 1.6rem;
   cursor: pointer;
   transition: all 100ms;
-
 }
 
 .country__list__item img {
@@ -49,4 +46,14 @@
   background-color: var(--secondary--color);
   padding: 0.5rem 1rem;
   border-radius: 0.8rem;
+}
+
+.clickedLight {
+  background-color: #e6e6ff;
+  color: #000;
+}
+
+.clickedDark {
+  background-color: #1f2937;
+  color: #fff;
 }

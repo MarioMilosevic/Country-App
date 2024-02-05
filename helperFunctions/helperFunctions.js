@@ -24,7 +24,7 @@ export const pageButtons = (arr, list) => {
   for (let i = 0; i < totalButtons; i++) {
     const button = document.createElement("button");
     button.classList.add("listBtn");
-    button.id = i + 1
+    button.id = i + 1;
     button.textContent = i + 1;
     list.appendChild(button);
   }
@@ -58,11 +58,11 @@ export const toggleLiBackgroundColor = (arr) => {
 };
 
 export const togglePageNumbersColor = (buttons) => {
-  buttons.forEach(btn => {
+  buttons.forEach((btn) => {
     btn.style.backgroundColor = darkMode.getDarkMode() ? "#1f2937" : "#fff";
-    btn.style.color = darkMode.getDarkMode() ? "#ffffff" : "#000000"
-  })
-}
+    btn.style.color = darkMode.getDarkMode() ? "#ffffff" : "#000000";
+  });
+};
 
 export const toggleBrightnessImg = () => {
   const light = "./public/img/sun.jpg";
@@ -74,4 +74,16 @@ export const toggleBrightnessText = () => {
   brightnessText.textContent = darkMode.getDarkMode()
     ? "Dark Mode"
     : "Light Mode";
+};
+
+export const lightButton = (element) => {
+  element.style.backgroundColor = "#fff";
+  element.style.color = "#000";
+  console.log("svjetlo");
+};
+
+export const darkButton = (element) => {
+  element.style.backgroundColor = "#1f2937";
+  element.style.color = "#fff";
+  console.log("mrak");
 };
