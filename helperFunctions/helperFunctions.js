@@ -41,8 +41,8 @@ export const findCountry = async function (url) {
 };
 
 export const toggleCountryAppLogo = (img) => {
-  const lightImg = "./public/img/planet-earth-light.jpg";
-  const darkImg = "./public/img/planet-earth-dark.jpg";
+  const lightImg = "./img/planet-earth-light.jpg";
+  const darkImg = "./img/planet-earth-dark.jpg";
   img.src = darkMode.getDarkMode() ? darkImg : lightImg;
 };
 
@@ -65,8 +65,8 @@ export const togglePageNumbersColor = (buttons) => {
 };
 
 export const toggleBrightnessImg = () => {
-  const light = "./public/img/sun.jpg";
-  const dark = "./public/img/moon.png";
+  const light = "./img/sun.jpg";
+  const dark = "./img/moon.png";
   brightnessImg.src = darkMode.getDarkMode() ? dark : light;
 };
 

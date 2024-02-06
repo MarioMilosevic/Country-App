@@ -14,6 +14,55 @@ import {
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
+import { router } from "./Router/router";
+// import { Router, routes } from "./Router/router";
+
+// window.app = {};
+// app.router = router;
+
+window.addEventListener("popstate", (event) => {
+  console.log(
+    `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
+  );
+});
+
+history.pushState({ page: 1 }, "title 1", "?page=1");
+
+
+const popStateEvent = new PopStateEvent("popstate", { state: history.state });
+window.dispatchEvent(popStateEvent);
+
+// window.addEventListener("popstate", (event) => {
+//   console.log(
+//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
+//   );
+// });
+
+// window.addEventListener("popstate", (event) => {
+//   console.log(
+//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
+//   );
+// });
+// history.pushState({ page: 1 }, "title 1", "?page=1");
+
+// history.pushState({ page: 1 }, "title 1", "?page=1");
+// history.pushState({ page: 2 }, "title 2", "?page=2");
+// history.replaceState({ page: 3 }, "title 3", "?page=3");
+// history.back(); // Logs "location: http://example.com/example.html?page=1, state: {"page":1}"
+// history.back(); // Logs "location: http://example.com/example.html, state: null"
+// history.go(2); // Logs "location: http://example.com/example.html?page=3, state: {"page":3}"
+
+// window.addEventListener("DOMContentLoaded", async () => {
+//   app.router = router;
+//   // app.router.init();
+// });
+
+// const dugme = document.querySelector(".test");
+// dugme.addEventListener("click", function () {
+//   // app.router.go("sir", true);
+//   // history.pushState({ page:1 }, "", "sir");
+// });
+
 const brightness = document.querySelector("#brightness");
 export const brightnessImg = brightness.querySelector("img");
 export const brightnessText = brightness.querySelector("p");
@@ -28,6 +77,13 @@ export const countries = new Countries();
 let page = 0;
 const previousPage = document.querySelector(".previousPage");
 const nextPage = document.querySelector(".nextPage");
+
+// const router = new Router(routes)
+// router.navigateTo('/about')
+
+window.addEventListener("popstate", function () {
+  router.loadInitialRoute();
+});
 
 const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
