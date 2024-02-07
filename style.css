@@ -102,4 +102,6 @@
   flex-direction: column;
   justify-content: space-between;
   padding: 1.1rem 1rem;
+  font-size: 1.1rem;
+  font-weight: 500;
 }

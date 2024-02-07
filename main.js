@@ -96,6 +96,7 @@ renderPageButtons(countries.getCountries(), pageNumbers);
 
 countryList.addEventListener("click", function (e) {
   const target = e.target;
+  console.dir(target);
   if (target.matches(".country__list__item")) {
     const countryName = target.querySelector("h2").textContent;
     const countryObj = countries.getCountry(countryName);
@@ -104,15 +105,15 @@ countryList.addEventListener("click", function (e) {
       `country ${countryName}`,
       `/${countryObj.flag}`
     );
-
     const selectedCountry = countries.getCountry(countryName);
-      console.log(selectedCountry);
+    console.log(selectedCountry);
     showCountryInformation(main, selectedCountry);
   }
   if (target.matches("img")) {
     const countryName = target.nextElementSibling.textContent;
+    const selectedCountry = countries.getCountry(countryName);
+    showCountryInformation(main, selectedCountry);
     console.log(countries.getCountry(countryName));
-    // main.innerHTML = ''
   }
 });
 

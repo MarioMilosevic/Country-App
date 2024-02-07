@@ -11,7 +11,7 @@ export const showCountries = (arr) => {
     const country = document.createElement("li");
     country.classList.add("country__list__item");
     country.innerHTML = `<img src="${obj.flags.svg}">
-      <h2>${obj.name.common}</h2>
+      <h2 class="country__name">${obj.name.common}</h2>
       `;
     countryList.appendChild(country);
   });
@@ -99,6 +99,7 @@ export const pageClickedHandler = (target) => {
 };
 
 export const showCountryInformation = (list, obj) => {
+  const firstProperty = Object.values(obj.currencies)[0]
   list.innerHTML = "";
   const country = document.createElement("div");
   country.classList.add("country__information");
@@ -121,10 +122,10 @@ export const showCountryInformation = (list, obj) => {
   <p>Official Name: ${obj.name.official}</p>
   <p>Continent: ${obj.continents[0]}</p>
   <p>Languages: ${obj.languages.prs}</p>
-  <p>Area: ${obj.area} km2</p>
-  <p>Population: ${obj.population}</p>
+  <p>Area: ${obj.area} km<sup>2</sup></p>
+  <p>Population: ${obj.population.toLocaleString()}</p>
   <p>Capital: ${obj.capital}</p>
-  <p>Currency: ${obj.currencies.AFN.name} </p>
+  <p>Currency: ${firstProperty.name} </p>
   
   </div>
   
@@ -132,5 +133,6 @@ export const showCountryInformation = (list, obj) => {
 
   </div>
   `;
+  console.log(firstProperty);
   list.appendChild(country)
 };
