@@ -106,7 +106,7 @@ countryList.addEventListener("click", function (e) {
     );
 
     const selectedCountry = countries.getCountry(countryName);
-    // main.innerHTML = ''
+      console.log(selectedCountry);
     showCountryInformation(main, selectedCountry);
   }
   if (target.matches("img")) {
