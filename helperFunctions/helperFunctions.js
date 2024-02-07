@@ -4,9 +4,8 @@ import {
   darkMode,
   brightnessImg,
   brightnessText,
-  firstPageBtn
+  firstPageBtn,
 } from "../main";
-import { countries } from "../main";
 export const showCountries = (arr) => {
   arr.forEach((obj) => {
     const country = document.createElement("li");
@@ -19,6 +18,7 @@ export const showCountries = (arr) => {
 };
 
 export const renderPageButtons = (arr, list) => {
+  list.innerHTML = "";
   const length = arr.length;
   const totalButtons = length / 24;
   for (let i = 0; i < totalButtons; i++) {
@@ -93,9 +93,42 @@ export const pageClickedHandler = (target) => {
     btn.classList.remove("clicked");
     darkMode.getDarkMode() ? darkButton(btn) : lightButton(btn);
   });
-  
+
   target.classList.add("clicked");
   darkMode.getDarkMode() ? lightButton(target) : darkButton(target);
 };
 
+export const showCountryInformation = (list, obj) => {
+  list.innerHTML = "";
+  const country = document.createElement("div");
+  country.classList.add("country__information");
+  country.innerHTML = `
+  <div class="container__information">
 
+  <div class="return__information">
+  <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
+  <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
+  </svg>
+  <span>Go back</span>
+  </div>
+
+  <div class="main__information">
+  <img src="${obj.flags.svg}">
+
+  <div class="informations">
+  <p>Official Name: ${obj.name.official}</p>
+  <p>Continent: ${obj.continents[0]}</p>
+  <p>Languages: ${obj.languages.prs}</p>
+  <p>Area: ${obj.area} km2</p>
+  <p>Population: ${obj.population}</p>
+  <p>Capital: ${obj.capital}</p>
+  <p>Currency: ${obj.currencies} </p>
+  
+  </div>
+  
+  </div>
+
+  </div>
+  `;
+  list.appendChild(country)
+};

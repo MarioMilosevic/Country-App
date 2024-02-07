@@ -17,28 +17,31 @@
   <body
     class="font-body min-h-screen leading-[120%] bg-primary dark:bg-gray-900 dark:text-white transition-all duration-500"
   >
-    <header
-      class="flex items-center justify-between p-12 text-2xl bg-white shadow-md dark:bg-gray-800 transition-all duration-500"
-    >
-      <div class="w-[80%] mx-auto flex justify-between items-center">
-        <div class="country__app flex items-center gap-2 p-4 cursor-pointer">
-          <img
-            id="country__app__logo"
-            class="w-11 h-11 text-red-500 rounded-full"
-            src="/img/planet-earth-light.jpg"
-            alt="planet"
-          />
-          <h1 class="text-xlg">Country App</h1>
-        </div>
+    <div id="app" class="h-full">
+      <header
+        class="flex items-center justify-between p-12 text-2xl bg-white shadow-md dark:bg-gray-800 transition-all duration-500"
+      >
+        <div class="w-[80%] mx-auto flex justify-between items-center">
+          <div class="country__app flex items-center gap-2 p-4 cursor-pointer">
+            <img
+              id="country__app__logo"
+              class="w-11 h-11 text-red-500 rounded-full"
+              src="/img/planet-earth-light.jpg"
+              alt="planet"
+            />
+            <h1 class="text-xlg">Country App</h1>
+          </div>
 
-        <div id="brightness" class="flex items-center gap-2 p-4 cursor-pointer">
-          <img src="/img/sun.jpg" alt="sun" class="w-11 h-11" />
-          <p class="text-xlg">Light Mode</p>
+          <div
+            id="brightness"
+            class="flex items-center gap-2 p-4 cursor-pointer"
+          >
+            <img src="/img/sun.jpg" alt="sun" class="w-11 h-11" />
+            <p class="text-xlg">Light Mode</p>
+          </div>
         </div>
-      </div>
-    </header>
-    <div id="app" class="h-full w-[80%] mx-auto">
-      <main class="h-full">
+      </header>
+      <main class="h-full w-[80%] mx-auto">
         <div
           class="search__bar__container p-12 flex items-center justify-between"
         >

@@ -11,6 +11,7 @@ import {
   darkButton,
   lightButton,
   pageClickedHandler,
+  showCountryInformation,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -22,12 +23,11 @@ import { router } from "./Router/router";
 
 window.addEventListener("popstate", (event) => {
   console.log(
-    `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
+    `location: ${document.location}, state: ${JSON.stringify(event.state)}`
   );
 });
 
 history.pushState({ page: 1 }, "title 1", "?page=1");
-
 
 const popStateEvent = new PopStateEvent("popstate", { state: history.state });
 window.dispatchEvent(popStateEvent);
@@ -62,7 +62,7 @@ window.dispatchEvent(popStateEvent);
 //   // app.router.go("sir", true);
 //   // history.pushState({ page:1 }, "", "sir");
 // });
-
+const main = document.querySelector("main");
 const brightness = document.querySelector("#brightness");
 export const brightnessImg = brightness.querySelector("img");
 export const brightnessText = brightness.querySelector("p");
@@ -77,13 +77,12 @@ export const countries = new Countries();
 let page = 0;
 const previousPage = document.querySelector(".previousPage");
 const nextPage = document.querySelector(".nextPage");
-
 // const router = new Router(routes)
 // router.navigateTo('/about')
 
-window.addEventListener("popstate", function () {
-  router.loadInitialRoute();
-});
+// window.addEventListener("popstate", function () {
+//   router.loadInitialRoute();
+// });
 
 const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
@@ -94,6 +93,29 @@ countries.sortCountries();
 
 showCountries(countries.get24Countries("1").sort());
 renderPageButtons(countries.getCountries(), pageNumbers);
+
+countryList.addEventListener("click", function (e) {
+  const target = e.target;
+  if (target.matches(".country__list__item")) {
+    const countryName = target.querySelector("h2").textContent;
+    const countryObj = countries.getCountry(countryName);
+    history.pushState(
+      { countryName },
+      `country ${countryName}`,
+      `/${countryObj.flag}`
+    );
+
+    const selectedCountry = countries.getCountry(countryName);
+    // main.innerHTML = ''
+    showCountryInformation(main, selectedCountry);
+  }
+  if (target.matches("img")) {
+    const countryName = target.nextElementSibling.textContent;
+    console.log(countries.getCountry(countryName));
+    // main.innerHTML = ''
+  }
+});
+
 /////////////////////////////////////////////////////////
 export const firstPageBtn = document.querySelector(".listBtn");
 const pageButtons = document.querySelectorAll(".listBtn");
@@ -108,9 +130,11 @@ countryRegion.addEventListener("change", async () => {
     const responseAll = await findCountry(urlAll);
     countries.setCountries(responseAll);
     countries.sortCountries();
-    showCountries(countries.get24Countries("1").sort());
+    showCountries(countries.get24Countries("1"));
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
+    renderPageButtons(responseAll, pageNumbers);
+
     firstPageBtn.classList.add("selected");
   } else {
     const response = await findCountry(url);

@@ -27,4 +27,10 @@ export class Countries {
       return a.name.common.localeCompare(b.name.common);
     });
   }
+
+  getCountry(countryName) {
+    return this.countries.find(
+      (country) => country.name.common === countryName
+    );
+  }
 }

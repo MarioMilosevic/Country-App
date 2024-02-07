@@ -36,7 +36,6 @@
   max-height: 10rem;
   box-shadow: rgba(149, 157, 165, 1) 0px 8px 24px;
   transition: ease-out 500ms;
-
 }
 .country__list__item h2 {
   text-align: center;
@@ -58,4 +57,41 @@
 .clickedDark {
   background-color: #1f2937;
   color: #fff;
+}
+
+.container__information {
+  border: 1px solid black;
+  margin: 0 auto;
+  width: 50%;
+
+
+}
+
+.return__information {
+  border: 1px solid black;
+  margin: 0 auto;
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  padding: 1rem;
+  font-size: 1.4rem;
+}
+
+.main__information{
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  /* margin: 0 auto; */
+}
+
+.main__information img {
+  width: 330px;
+  height: 250px;
+}
+
+.informations{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 1.1rem 1rem;
 }
