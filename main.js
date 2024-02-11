@@ -12,6 +12,7 @@ import {
   lightButton,
   pageClickedHandler,
   showCountryInformation,
+  showCountry,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -62,7 +63,7 @@ window.dispatchEvent(popStateEvent);
 //   // app.router.go("sir", true);
 //   // history.pushState({ page:1 }, "", "sir");
 // });
-const main = document.querySelector("main");
+export const main = document.querySelector("main");
 const brightness = document.querySelector("#brightness");
 export const brightnessImg = brightness.querySelector("img");
 export const brightnessText = brightness.querySelector("p");
@@ -94,28 +95,7 @@ countries.sortCountries();
 showCountries(countries.get24Countries("1").sort());
 renderPageButtons(countries.getCountries(), pageNumbers);
 
-countryList.addEventListener("click", function (e) {
-  const target = e.target;
-  console.dir(target);
-  if (target.matches(".country__list__item")) {
-    const countryName = target.querySelector("h2").textContent;
-    const countryObj = countries.getCountry(countryName);
-    history.pushState(
-      { countryName },
-      `country ${countryName}`,
-      `/${countryObj.flag}`
-    );
-    const selectedCountry = countries.getCountry(countryName);
-    console.log(selectedCountry);
-    showCountryInformation(main, selectedCountry);
-  }
-  if (target.matches("img")) {
-    const countryName = target.nextElementSibling.textContent;
-    const selectedCountry = countries.getCountry(countryName);
-    showCountryInformation(main, selectedCountry);
-    console.log(countries.getCountry(countryName));
-  }
-});
+countryList.addEventListener("click", (e) => showCountry(e));
 
 /////////////////////////////////////////////////////////
 export const firstPageBtn = document.querySelector(".listBtn");

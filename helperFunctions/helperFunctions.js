@@ -4,7 +4,7 @@ import {
   darkMode,
   brightnessImg,
   brightnessText,
-  firstPageBtn,
+  firstPageBtn,countries,main
 } from "../main";
 export const showCountries = (arr) => {
   arr.forEach((obj) => {
@@ -140,3 +140,26 @@ export const showCountryInformation = (list, obj) => {
   });
   list.appendChild(country);
 };
+
+export const showCountry = (e) => {
+  const target = e.target;
+  console.dir(target);
+  if (target.matches(".country__list__item")) {
+    const countryName = target.querySelector("h2").textContent;
+    const countryObj = countries.getCountry(countryName);
+    history.pushState(
+      { countryName },
+      `country ${countryName}`,
+      `/${countryObj.flag}`
+    );
+    const selectedCountry = countries.getCountry(countryName);
+    console.log(selectedCountry);
+    showCountryInformation(main, selectedCountry);
+  }
+  if (target.matches("img")) {
+    const countryName = target.nextElementSibling.textContent;
+    const selectedCountry = countries.getCountry(countryName);
+    showCountryInformation(main, selectedCountry);
+    console.log(countries.getCountry(countryName));
+  }
+}
