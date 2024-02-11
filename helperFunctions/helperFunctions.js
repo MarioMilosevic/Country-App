@@ -99,7 +99,7 @@ export const pageClickedHandler = (target) => {
 };
 
 export const showCountryInformation = (list, obj) => {
-  const firstProperty = Object.values(obj.currencies)[0]
+  const firstProperty = Object.values(obj.currencies)[0];
   list.innerHTML = "";
   const country = document.createElement("div");
   country.classList.add("country__information");
@@ -111,7 +111,7 @@ export const showCountryInformation = (list, obj) => {
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
   <path stroke-linecap="round" stroke-linejoin="round" d="M9 15 3 9m0 0 6-6M3 9h12a6 6 0 0 1 0 12h-3" />
   </svg>
-  <span>Go back</span>
+  <span class="go__back">Go back</span>
   </div>
   </div>
 
@@ -134,5 +134,9 @@ export const showCountryInformation = (list, obj) => {
   </div>
   `;
   console.log(firstProperty);
-  list.appendChild(country)
+  const goBackBtn = country.querySelector(".go__back");
+  goBackBtn.addEventListener("click", function () {
+    console.log("click");
+  });
+  list.appendChild(country);
 };
