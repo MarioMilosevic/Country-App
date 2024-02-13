@@ -14,64 +14,25 @@ import {
   showCountryInformation,
   showCountry,
   goBackDark,
-  goBackLight
+  goBackLight,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
 import { Router } from "./Router/Router";
+
 export const router = new Router();
-// console.log(Router);
-// console.log(window );
-// window.app = {};
-// app.router = router;
 
 window.addEventListener("DOMContentLoaded", function () {
   console.log("loaded");
-  router.init();
+  if (!window.location.href.includes("?page=1")) {
+    window.location.href = "?page=1";
+  } else {
+    return;
+  }
+  // router.init();
+  // window.location.href = "mario";
 });
 
-// window.addEventListener("popstate", (event) => {
-//   // router.init()
-//   console.log(
-//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
-//   );
-//   console.log('popstate');
-//   // history.pushState({ page: 1 }, "title 1", "?page=1");
-// });
-
-// const popStateEvent = new PopStateEvent("popstate", { state: history.state });
-// window.dispatchEvent(popStateEvent);
-
-// window.addEventListener("popstate", (event) => {
-//   console.log(
-//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
-//   );
-// });
-
-// window.addEventListener("popstate", (event) => {
-//   console.log(
-//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
-//   );
-// });
-// history.pushState({ page: 1 }, "title 1", "?page=1");
-
-// history.pushState({ page: 1 }, "title 1", "?page=1");
-// history.pushState({ page: 2 }, "title 2", "?page=2");
-// history.replaceState({ page: 3 }, "title 3", "?page=3");
-// history.back(); // Logs "location: http://example.com/example.html?page=1, state: {"page":1}"
-// history.back(); // Logs "location: http://example.com/example.html, state: null"
-// history.go(2); // Logs "location: http://example.com/example.html?page=3, state: {"page":3}"
-
-// window.addEventListener("DOMContentLoaded", async () => {
-//   app.router = router;
-//   // app.router.init();
-// });
-
-// const dugme = document.querySelector(".test");
-// dugme.addEventListener("click", function () {
-//   // app.router.go("sir", true);
-//   // history.pushState({ page:1 }, "", "sir");
-// });
 export const main = document.querySelector("main");
 const brightness = document.querySelector("#brightness");
 export const searchBarContainer = document.querySelector(
@@ -92,6 +53,11 @@ export const countries = new Countries();
 let page = 0;
 const previousPage = document.querySelector(".previousPage");
 const nextPage = document.querySelector(".nextPage");
+
+const url = function (arg) {
+  `https://restcountries.com/v3.1/${arg}`;
+};
+
 // const router = new Router(routes)
 // router.navigateTo('/about')
 
@@ -182,9 +148,13 @@ brightness.addEventListener("click", function () {
     ? lightButton(selectedPageBtn)
     : darkButton(selectedPageBtn);
 
-  const returnInformationChildren = document.querySelector('.return__information__children')
-  if(returnInformationChildren){
-    darkMode.getDarkMode() ? goBackDark(returnInformationChildren) : goBackLight(returnInformationChildren)
+  const returnInformationChildren = document.querySelector(
+    ".return__information__children"
+  );
+  if (returnInformationChildren) {
+    darkMode.getDarkMode()
+      ? goBackDark(returnInformationChildren)
+      : goBackLight(returnInformationChildren);
   }
 });
 
@@ -229,31 +199,57 @@ nextPage.addEventListener("click", function () {
   }
 });
 
-// const router = async () => {
-//   const routes = [];
-// };
+function onBackButtonEvent(e) {
+  e.preventDefault();
+  // var currentLocation = window.location.pathname;
+  console.log("aaaaaaaaaaa");
+  history.pushState(null, null, "?page=1");
+}
 
-//////////////////////////////////////////////////////////////////////////////////////////////////////
-//  const route = (event) => {
-//   event = event || window.event
-//   event.preventDefault()
-//   window.history.pushState({}, "", event.target.href)
-// }
+window.addEventListener("popstate", onBackButtonEvent);
 
-//  const routes = {
-//   404: "/pages/404.html",
-//   "/": "/pages/index.html",
-//   "/about": "/pages/about.html",
-//   "/lorem": "/pages/lorem.html"
-// }
+// Cleanup
+window.addEventListener("popstate", onBackButtonEvent);
 
-//  const handleLocation = async () => {
-//   const path = window.location.pathname;
-//   const route = routes[path] || routes[404]
-//   const html = await fetch(route).then((data) => data.text())
-//   document.getElementById('app').innerHTML = html
-// }
+// window.addEventListener("popstate", (event) => {
+//   // router.init()
+//   console.log(
+//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
+//   );
+//   console.log('popstate');
+//   // history.pushState({ page: 1 }, "title 1", "?page=1");
+// });
 
-// window.onpopstate = handleLocation
-// window.route = route
-// handleLocation()
+// const popStateEvent = new PopStateEvent("popstate", { state: history.state });
+// window.dispatchEvent(popStateEvent);
+
+// window.addEventListener("popstate", (event) => {
+//   console.log(
+//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
+//   );
+// });
+
+// window.addEventListener("popstate", (event) => {
+//   console.log(
+//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
+//   );
+// });
+// history.pushState({ page: 1 }, "title 1", "?page=1");
+
+// history.pushState({ page: 1 }, "title 1", "?page=1");
+// history.pushState({ page: 2 }, "title 2", "?page=2");
+// history.replaceState({ page: 3 }, "title 3", "?page=3");
+// history.back(); // Logs "location: http://example.com/example.html?page=1, state: {"page":1}"
+// history.back(); // Logs "location: http://example.com/example.html, state: null"
+// history.go(2); // Logs "location: http://example.com/example.html?page=3, state: {"page":3}"
+
+// window.addEventListener("DOMContentLoaded", async () => {
+//   app.router = router;
+//   // app.router.init();
+// });
+
+// const dugme = document.querySelector(".test");
+// dugme.addEventListener("click", function () {
+//   // app.router.go("sir", true);
+//   // history.pushState({ page:1 }, "", "sir");
+// });
