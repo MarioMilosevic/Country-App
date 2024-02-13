@@ -158,13 +158,7 @@ export const showCountryInformation = (list, obj) => {
 };
 
 export const showPreviousCountries = () => {
-  // const url = history.replaceState({ page: 1 }, "title 1", "?page=1");
-  // window.location.href = url;
-  // console.log(window.location.href);
-  // history.replaceState(null, null, "?page=1");
-  if(!(window.location.href).includes("?page=1")){
-    window.location.href = "?page=1"
-  }
+  router.init();
   showCountries(countries.getCountries());
   countryList.style.display = "grid";
   searchBarContainer.style.display = "flex";
@@ -172,16 +166,27 @@ export const showPreviousCountries = () => {
   renderedCountry.style.display = "none";
 };
 
-export const showCountry = (e) => {
-  const target = e.target.closest('.country__list__item')
-    const countryName = target.querySelector("h2").textContent;
-    const countryObj = countries.getCountry(countryName);
-    console.log(countryObj);
-    router.go(countryObj.flag);
-    const selectedCountry = countries.getCountry(countryName);
-    countryList.style.display = "none";
-    searchBarContainer.style.display = "none";
-    pageList.style.display = "none";
-    renderedCountry.style.display = "block";
-    showCountryInformation(renderedCountry, selectedCountry);
+export const showCountry = async (e) => {
+  const target = e.target.closest(".country__list__item");
+  const countryName = target.querySelector("h2").textContent;
+  console.log(countryName);
+  // https://restcountries.com/v3.1/name/{name}
+
+  const [countryObj] = await findCountry(
+    `https://restcountries.com/v3.1/name/${countryName}`
+  );
+  console.log(countryObj);
+  console.log(countryObj.cca3);
+  // const countryObj = countries.getCountry(countryName);
+
+  router.go(countryObj.cc3);
+  // console.log(countryObj);
+
+  // router.go(countryObj.flag);
+  // const selectedCountry = countries.getCountry(countryName);
+  // countryList.style.display = "none";
+  // searchBarContainer.style.display = "none";
+  // pageList.style.display = "none";
+  // renderedCountry.style.display = "block";
+  // showCountryInformation(renderedCountry, selectedCountry);
 };

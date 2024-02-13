@@ -24,13 +24,7 @@ export const router = new Router();
 
 window.addEventListener("DOMContentLoaded", function () {
   console.log("loaded");
-  if (!window.location.href.includes("?page=1")) {
-    window.location.href = "?page=1";
-  } else {
-    return;
-  }
-  // router.init();
-  // window.location.href = "mario";
+  router.init()
 });
 
 export const main = document.querySelector("main");
@@ -58,12 +52,6 @@ const url = function (arg) {
   `https://restcountries.com/v3.1/${arg}`;
 };
 
-// const router = new Router(routes)
-// router.navigateTo('/about')
-
-// window.addEventListener("popstate", function () {
-//   router.loadInitialRoute();
-// });
 
 const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
