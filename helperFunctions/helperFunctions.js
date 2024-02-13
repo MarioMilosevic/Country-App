@@ -170,23 +170,15 @@ export const showCountry = async (e) => {
   const target = e.target.closest(".country__list__item");
   const countryName = target.querySelector("h2").textContent;
   console.log(countryName);
-  // https://restcountries.com/v3.1/name/{name}
 
   const [countryObj] = await findCountry(
     `https://restcountries.com/v3.1/name/${countryName}`
   );
-  console.log(countryObj);
-  console.log(countryObj.cca3);
-  // const countryObj = countries.getCountry(countryName);
-
-  router.go(countryObj.cc3);
-  // console.log(countryObj);
-
-  // router.go(countryObj.flag);
-  // const selectedCountry = countries.getCountry(countryName);
-  // countryList.style.display = "none";
-  // searchBarContainer.style.display = "none";
-  // pageList.style.display = "none";
-  // renderedCountry.style.display = "block";
-  // showCountryInformation(renderedCountry, selectedCountry);
+  const countryCode = countryObj.cca3
+  router.go(countryCode);
+  countryList.style.display = "none";
+  searchBarContainer.style.display = "none";
+  pageList.style.display = "none";
+  renderedCountry.style.display = "block";
+  showCountryInformation(renderedCountry, countryObj);
 };

@@ -12,10 +12,6 @@ export class Router {
   }
 
   go(route) {
-    console.log(route);
-    // console.log('aaaaaa');
-    // const flag = route.flag ? route.flag : "?page=1"
-    // console.log('aaaaaa');
     history.pushState({ route }, "", route);
   }
 
