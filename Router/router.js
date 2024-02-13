@@ -1,4 +1,19 @@
 "use strict";
+
+class Router {
+  constructor() {}
+
+  init() {
+    window.addEventListener("popstate", (e) => {
+      console.log("pop");
+      router.go(e.state.route, false);
+    });
+  }
+
+  go(){
+    
+  }
+}
 export const router = {
   init: () => {
     // Event handler for url changes
@@ -12,7 +27,7 @@ export const router = {
 
   go: (route) => {
     console.log(route);
-      history.pushState({ route }, "", route);
+    history.pushState({ route }, "", route);
   },
 };
 

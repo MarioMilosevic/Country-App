@@ -17,6 +17,7 @@ import {
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
 import { router } from "./Router/router";
+// console.log(router);
 // import { Router, routes } from "./Router/router";
 
 // window.app = {};
@@ -26,9 +27,10 @@ window.addEventListener("popstate", (event) => {
   console.log(
     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
   );
+  history.pushState({ page: 1 }, "title 1", "?page=1");
+  
 });
 
-history.pushState({ page: 1 }, "title 1", "?page=1");
 
 const popStateEvent = new PopStateEvent("popstate", { state: history.state });
 window.dispatchEvent(popStateEvent);
@@ -65,6 +67,10 @@ window.dispatchEvent(popStateEvent);
 // });
 export const main = document.querySelector("main");
 const brightness = document.querySelector("#brightness");
+export const searchBarContainer = document.querySelector(
+  ".search__bar__container"
+);
+export const renderedCountry = document.querySelector('.rendered__country')
 export const brightnessImg = brightness.querySelector("img");
 export const brightnessText = brightness.querySelector("p");
 const countrySearch = document.querySelector("#country__search");
@@ -115,7 +121,6 @@ countryRegion.addEventListener("change", async () => {
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
     renderPageButtons(responseAll, pageNumbers);
-
     firstPageBtn.classList.add("selected");
   } else {
     const response = await findCountry(url);
@@ -211,7 +216,9 @@ nextPage.addEventListener("click", function () {
   }
 });
 
-// MORAM RIJESITI BAG, KADA IMAM NPR 60 ZEMALJA, I RENDEROVAO SAM SVIH 60, DA SPRIJECIM DA SE KLIKNE DALJE, JER SE SAMO ISPRAZNI LISTA I OSTANE SVE PRAZNO !!!!!!!!!!!
+// const router = async () => {
+//   const routes = [];
+// };
 
 //////////////////////////////////////////////////////////////////////////////////////////////////////
 //  const route = (event) => {

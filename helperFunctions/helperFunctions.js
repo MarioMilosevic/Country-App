@@ -1,10 +1,15 @@
 "use strict";
 import {
   countryList,
+  pageList,
   darkMode,
   brightnessImg,
   brightnessText,
-  firstPageBtn,countries,main
+  firstPageBtn,
+  countries,
+  main,
+  searchBarContainer,
+  renderedCountry,
 } from "../main";
 export const showCountries = (arr) => {
   arr.forEach((obj) => {
@@ -134,32 +139,50 @@ export const showCountryInformation = (list, obj) => {
   </div>
   `;
   console.log(firstProperty);
-  const goBackBtn = country.querySelector(".go__back");
-  goBackBtn.addEventListener("click", function () {
-    console.log("click");
-  });
   list.appendChild(country);
+  const goBackBtn = country.querySelector(".go__back");
+  goBackBtn.addEventListener("click", showPreviousCountries);
 };
 
+export const showPreviousCountries = () => {
+  history.pushState({ page: 1 }, "title 1", "?page=1");
+  showCountries(countries.getCountries());
+  countryList.style.display = "grid"
+  searchBarContainer.style.display = "flex"
+  pageList.style.display = "grid"
+  renderedCountry.style.display = "none"
+}
+
 export const showCountry = (e) => {
+  console.log(e);
   const target = e.target;
   console.dir(target);
   if (target.matches(".country__list__item")) {
     const countryName = target.querySelector("h2").textContent;
     const countryObj = countries.getCountry(countryName);
     history.pushState(
-      { countryName },
+      { page: countryName },
       `country ${countryName}`,
       `/${countryObj.flag}`
     );
+    console.log(history);
+    console.log(`location: ${document.location}}`);
     const selectedCountry = countries.getCountry(countryName);
-    console.log(selectedCountry);
-    showCountryInformation(main, selectedCountry);
+    // console.log(selectedCountry);
+    countryList.style.display = "none"
+    searchBarContainer.style.display = "none"
+    pageList.style.display = "none"
+    renderedCountry.style.display = "block"
+    showCountryInformation(renderedCountry, selectedCountry);
   }
   if (target.matches("img")) {
     const countryName = target.nextElementSibling.textContent;
     const selectedCountry = countries.getCountry(countryName);
-    showCountryInformation(main, selectedCountry);
-    console.log(countries.getCountry(countryName));
+    countryList.style.display = "none"
+    searchBarContainer.style.display = "none"
+    pageList.style.display = "none"
+    renderedCountry.style.display = "block"
+    showCountryInformation(renderedCountry, selectedCountry);
+    // console.log(countries.getCountry(countryName));
   }
-}
+};
