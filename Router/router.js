@@ -1,6 +1,6 @@
 "use strict";
 
-class Router {
+export class Router {
   constructor() {}
 
   init() {
@@ -10,26 +10,27 @@ class Router {
     });
   }
 
-  go(){
-    
-  }
-}
-export const router = {
-  init: () => {
-    // Event handler for url changes
-    window.addEventListener("popstate", (e) => {
-      console.log("pop");
-      router.go(e.state.route, false);
-      // Check the initial URL
-      // router.go(location.pathname);
-    });
-  },
-
-  go: (route) => {
+  go(route) {
     console.log(route);
     history.pushState({ route }, "", route);
-  },
-};
+  }
+}
+// export const router = {
+//   init: () => {
+//     // Event handler for url changes
+//     window.addEventListener("popstate", (e) => {
+//       console.log("pop");
+//       router.go(e.state.route, false);
+//       // Check the initial URL
+//       // router.go(location.pathname);
+//     });
+//   },
+
+//   go: (route) => {
+//     console.log(route);
+//     history.pushState({ route }, "", route);
+//   },
+// };
 
 // const route2 = {
 

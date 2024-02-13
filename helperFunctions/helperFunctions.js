@@ -104,7 +104,8 @@ export const pageClickedHandler = (target) => {
 };
 
 export const showCountryInformation = (list, obj) => {
-  const firstProperty = Object.values(obj.currencies)[0];
+  const firstCurrency = Object.values(obj.currencies)[0];
+  const firstLanguage = Object.values(obj.languages)[0];
   list.innerHTML = "";
   const country = document.createElement("div");
   country.classList.add("country__information");
@@ -126,11 +127,11 @@ export const showCountryInformation = (list, obj) => {
   <div class="informations">
   <p>Official Name: ${obj.name.official}</p>
   <p>Continent: ${obj.continents[0]}</p>
-  <p>Languages: ${obj.languages.prs}</p>
+  <p>Languages: ${firstLanguage}</p>
   <p>Area: ${obj.area} km<sup>2</sup></p>
   <p>Population: ${obj.population.toLocaleString()}</p>
   <p>Capital: ${obj.capital}</p>
-  <p>Currency: ${firstProperty.name} </p>
+  <p>Currency: ${firstCurrency.name} </p>
   
   </div>
   
@@ -138,9 +139,8 @@ export const showCountryInformation = (list, obj) => {
 
   </div>
   `;
-  console.log(firstProperty);
   list.appendChild(country);
-  const goBackBtn = country.querySelector(".go__back");
+  const goBackBtn = country.querySelector(".return__information__children");
   goBackBtn.addEventListener("click", showPreviousCountries);
 };
 
@@ -154,7 +154,7 @@ export const showPreviousCountries = () => {
 }
 
 export const showCountry = (e) => {
-  console.log(e);
+  // console.log(e);
   const target = e.target;
   console.dir(target);
   if (target.matches(".country__list__item")) {
@@ -165,10 +165,10 @@ export const showCountry = (e) => {
       `country ${countryName}`,
       `/${countryObj.flag}`
     );
-    console.log(history);
-    console.log(`location: ${document.location}}`);
+    // console.log(history);
+    // console.log(`location: ${document.location}}`);
     const selectedCountry = countries.getCountry(countryName);
-    // console.log(selectedCountry);
+    console.log(selectedCountry);
     countryList.style.display = "none"
     searchBarContainer.style.display = "none"
     pageList.style.display = "none"

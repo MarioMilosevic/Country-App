@@ -16,10 +16,9 @@ import {
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
-import { router } from "./Router/router";
-// console.log(router);
-// import { Router, routes } from "./Router/router";
-
+import {Router} from "./Router/Router"
+// console.log(Router);
+// console.log(window );
 // window.app = {};
 // app.router = router;
 
