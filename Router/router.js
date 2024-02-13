@@ -4,8 +4,10 @@ export class Router {
   constructor() {}
 
   init() {
-    if (!window.location.href.includes("?page=1")) {
-      window.location.href = "?page=1";
+    if (!window.location.href.includes("firstPage")) {
+      window.location.href = "firstPage";
+      console.log(history);
+      console.log(window.location);
     } else {
       return;
     }

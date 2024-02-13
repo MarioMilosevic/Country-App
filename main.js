@@ -24,7 +24,9 @@ export const router = new Router();
 
 window.addEventListener("DOMContentLoaded", function () {
   console.log("loaded");
-  router.init()
+  router.init();
+  console.log(history);
+  console.log(window.location);
 });
 
 export const main = document.querySelector("main");
@@ -47,11 +49,6 @@ export const countries = new Countries();
 let page = 0;
 const previousPage = document.querySelector(".previousPage");
 const nextPage = document.querySelector(".nextPage");
-
-const url = function (arg) {
-  `https://restcountries.com/v3.1/${arg}`;
-};
-
 
 const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"

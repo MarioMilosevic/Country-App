@@ -157,28 +157,33 @@ export const showCountryInformation = (list, obj) => {
   countryApp.addEventListener("click", showPreviousCountries);
 };
 
-export const showPreviousCountries = () => {
-  router.init();
+export const showPreviousCountries = (e) => {
+  console.log(window.location.href);
+  // window.location.href = "mario"
+  history.pushState({page:1}, "First page", "firstPage");
   showCountries(countries.getCountries());
   countryList.style.display = "grid";
   searchBarContainer.style.display = "flex";
   pageList.style.display = "grid";
   renderedCountry.style.display = "none";
+  console.log(history);
+  console.log(window.location);
 };
 
 export const showCountry = async (e) => {
+ 
   const target = e.target.closest(".country__list__item");
   const countryName = target.querySelector("h2").textContent;
-  console.log(countryName);
-
   const [countryObj] = await findCountry(
     `https://restcountries.com/v3.1/name/${countryName}`
   );
-  const countryCode = countryObj.cca3
+  const countryCode = countryObj.cca3;
   router.go(countryCode);
   countryList.style.display = "none";
   searchBarContainer.style.display = "none";
   pageList.style.display = "none";
   renderedCountry.style.display = "block";
   showCountryInformation(renderedCountry, countryObj);
+  console.log(history);
+  console.log(window.location);
 };
