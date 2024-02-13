@@ -13,26 +13,34 @@ import {
   pageClickedHandler,
   showCountryInformation,
   showCountry,
+  goBackDark,
+  goBackLight
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
-import {Router} from "./Router/Router"
+import { Router } from "./Router/Router";
+export const router = new Router();
 // console.log(Router);
 // console.log(window );
 // window.app = {};
 // app.router = router;
 
-window.addEventListener("popstate", (event) => {
-  console.log(
-    `location: ${document.location}, state: ${JSON.stringify(event.state)}`
-  );
-  history.pushState({ page: 1 }, "title 1", "?page=1");
-  
+window.addEventListener("DOMContentLoaded", function () {
+  console.log("loaded");
+  router.init();
 });
 
+// window.addEventListener("popstate", (event) => {
+//   // router.init()
+//   console.log(
+//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
+//   );
+//   console.log('popstate');
+//   // history.pushState({ page: 1 }, "title 1", "?page=1");
+// });
 
-const popStateEvent = new PopStateEvent("popstate", { state: history.state });
-window.dispatchEvent(popStateEvent);
+// const popStateEvent = new PopStateEvent("popstate", { state: history.state });
+// window.dispatchEvent(popStateEvent);
 
 // window.addEventListener("popstate", (event) => {
 //   console.log(
@@ -69,7 +77,8 @@ const brightness = document.querySelector("#brightness");
 export const searchBarContainer = document.querySelector(
   ".search__bar__container"
 );
-export const renderedCountry = document.querySelector('.rendered__country')
+export const countryApp = document.querySelector(".country__app");
+export const renderedCountry = document.querySelector(".rendered__country");
 export const brightnessImg = brightness.querySelector("img");
 export const brightnessText = brightness.querySelector("p");
 const countrySearch = document.querySelector("#country__search");
@@ -99,7 +108,7 @@ countries.sortCountries();
 
 showCountries(countries.get24Countries("1").sort());
 renderPageButtons(countries.getCountries(), pageNumbers);
-
+// ///////////////////////////////////////////////////////////////////////////////////////////////
 countryList.addEventListener("click", (e) => showCountry(e));
 
 /////////////////////////////////////////////////////////
@@ -172,6 +181,11 @@ brightness.addEventListener("click", function () {
   darkMode.getDarkMode()
     ? lightButton(selectedPageBtn)
     : darkButton(selectedPageBtn);
+
+  const returnInformationChildren = document.querySelector('.return__information__children')
+  if(returnInformationChildren){
+    darkMode.getDarkMode() ? goBackDark(returnInformationChildren) : goBackLight(returnInformationChildren)
+  }
 });
 
 previousPage.addEventListener("click", function () {

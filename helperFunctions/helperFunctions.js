@@ -10,6 +10,8 @@ import {
   main,
   searchBarContainer,
   renderedCountry,
+  countryApp,
+  router,
 } from "../main";
 export const showCountries = (arr) => {
   arr.forEach((obj) => {
@@ -50,6 +52,19 @@ export const toggleCountryAppLogo = (img) => {
   const darkImg = "./img/planet-earth-dark.jpg";
   img.src = darkMode.getDarkMode() ? darkImg : lightImg;
 };
+
+
+export const goBackLight = (element) => {
+element.style.backgroundColor = "#ffffff"
+element.style.color = "#000000"
+}
+
+export const goBackDark = (element) => {
+  element.style.backgroundColor = "#1f2937"
+  element.style.color = "#fff"
+  }
+
+
 
 export const toggleLiBackgroundColor = (arr) => {
   const shadow = "rgba(149, 157, 165, 0.2) 0px 8px 24px";
@@ -142,16 +157,20 @@ export const showCountryInformation = (list, obj) => {
   list.appendChild(country);
   const goBackBtn = country.querySelector(".return__information__children");
   goBackBtn.addEventListener("click", showPreviousCountries);
+  countryApp.addEventListener("click", showPreviousCountries);
 };
 
 export const showPreviousCountries = () => {
-  history.pushState({ page: 1 }, "title 1", "?page=1");
+  // const url = history.replaceState({ page: 1 }, "title 1", "?page=1");
+  // window.location.href = url;
+  // console.log(window.location.href);
+  history.pushState({ page: 1 }, "", "?page=1");
   showCountries(countries.getCountries());
-  countryList.style.display = "grid"
-  searchBarContainer.style.display = "flex"
-  pageList.style.display = "grid"
-  renderedCountry.style.display = "none"
-}
+  countryList.style.display = "grid";
+  searchBarContainer.style.display = "flex";
+  pageList.style.display = "grid";
+  renderedCountry.style.display = "none";
+};
 
 export const showCountry = (e) => {
   // console.log(e);
@@ -160,28 +179,32 @@ export const showCountry = (e) => {
   if (target.matches(".country__list__item")) {
     const countryName = target.querySelector("h2").textContent;
     const countryObj = countries.getCountry(countryName);
-    history.pushState(
-      { page: countryName },
-      `country ${countryName}`,
-      `/${countryObj.flag}`
-    );
+    console.log(countryObj);
+    router.go(countryObj.flag);
+    // history.pushState(
+    //   { page: countryName },
+    //   `country ${countryName}`,
+    //   `/${countryObj.flag}`
+    // );
     // console.log(history);
     // console.log(`location: ${document.location}}`);
     const selectedCountry = countries.getCountry(countryName);
-    console.log(selectedCountry);
-    countryList.style.display = "none"
-    searchBarContainer.style.display = "none"
-    pageList.style.display = "none"
-    renderedCountry.style.display = "block"
+    countryList.style.display = "none";
+    searchBarContainer.style.display = "none";
+    pageList.style.display = "none";
+    renderedCountry.style.display = "block";
     showCountryInformation(renderedCountry, selectedCountry);
   }
   if (target.matches("img")) {
     const countryName = target.nextElementSibling.textContent;
     const selectedCountry = countries.getCountry(countryName);
-    countryList.style.display = "none"
-    searchBarContainer.style.display = "none"
-    pageList.style.display = "none"
-    renderedCountry.style.display = "block"
+
+    router.go(selectedCountry.flag);
+
+    countryList.style.display = "none";
+    searchBarContainer.style.display = "none";
+    pageList.style.display = "none";
+    renderedCountry.style.display = "block";
     showCountryInformation(renderedCountry, selectedCountry);
     // console.log(countries.getCountry(countryName));
   }

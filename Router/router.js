@@ -4,16 +4,28 @@ export class Router {
   constructor() {}
 
   init() {
+  history.pushState({ page: 1 }, "title 1", "?page=1");
+  console.log("pop");
+  console.log(window.location);
+  console.log(window.location.href);
+
     window.addEventListener("popstate", (e) => {
-      console.log("pop");
-      router.go(e.state.route, false);
+      console.log('strelica nazad');
+      console.log(e);
+      console.log(e.state);
+      console.log(e.state.route);
+      this.go(e.state);
     });
   }
 
   go(route) {
     console.log(route);
+    // console.log('aaaaaa');
+    // const flag = route.flag ? route.flag : "?page=1"
+    // console.log('aaaaaa');
     history.pushState({ route }, "", route);
   }
+
 }
 // export const router = {
 //   init: () => {
