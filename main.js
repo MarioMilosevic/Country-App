@@ -16,7 +16,7 @@ import {
   goBackLight,
   showPreviousCountries,
   updateDebounceText,
-} from "./helperFunctions/helperFunctions";
+} from "/helperFunctions/helperFunctions";
 import { Countries } from "/Classes/Countries";
 import { DarkMode } from "/Classes/DarkMode";
 import { Router } from "/Router/Router";
