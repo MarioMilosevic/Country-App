@@ -40,7 +40,6 @@ export const brightnessText = brightness.querySelector("p");
 export const countryList = document.querySelector(".country__list");
 export const pageList = document.querySelector(".pageList");
 export const pageNumbers = document.querySelector(".pageNumbers");
-export const firstPageBtn = document.querySelector(".listBtn");
 
 export const darkMode = new DarkMode();
 export const router = new Router();
@@ -51,16 +50,26 @@ window.addEventListener("DOMContentLoaded", function () {
   router.init();
 });
 
-const fetchedCountries = await findCountry(`${url}/all`);
+// const fetcher = async () => {
+//   const fetchedCountries = await findCountry(`${url}/all`);
+//   return fetchedCountries
+// }
+let fetchedCountries;
 
-countries.setCountries(fetchedCountries);
-countries.sortCountries();
+export let firstPageBtn;
 
-showCountries(countries.get24Countries("1").sort());
-renderPageButtons(countries.getCountries(), pageNumbers);
+(async () => {
+  fetchedCountries = await findCountry(`${url}/all`);
+  countries.setCountries(fetchedCountries);
+  countries.sortCountries();
+  showCountries(countries.get24Countries("1").sort());
+  renderPageButtons(countries.getCountries(), pageNumbers);
+
+  const firstPageBtn = document.querySelector(".listBtn");
+  firstPageBtn.classList.add("clickedDark", "clicked");
+})();
+
 countryList.addEventListener("click", (e) => showCountry(e));
-
-firstPageBtn.classList.add("clickedDark", "clicked");
 
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
