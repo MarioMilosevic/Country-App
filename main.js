@@ -15,6 +15,7 @@ import {
   showCountry,
   goBackDark,
   goBackLight,
+  showPreviousCountries,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -95,6 +96,7 @@ countryRegion.addEventListener("change", async () => {
 });
 
 countrySearch.addEventListener("input", function () {
+  console.log('nesto');
   const currentCountries = countries.getCountries();
   const search = countrySearch.value.toLowerCase();
   const searchedCountries = currentCountries.filter((country) =>
@@ -188,13 +190,14 @@ function onBackButtonEvent(e) {
   e.preventDefault();
   // var currentLocation = window.location.pathname;
   console.log("aaaaaaaaaaa");
-  history.pushState(null, null, "?page=1");
+  history.pushState(null, null, "firstPage");
+  showPreviousCountries()
 }
 
 window.addEventListener("popstate", onBackButtonEvent);
 
 // Cleanup
-window.addEventListener("popstate", onBackButtonEvent);
+// window.addEventListener("popstate", onBackButtonEvent);
 
 // window.addEventListener("popstate", (event) => {
 //   // router.init()
