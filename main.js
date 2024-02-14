@@ -17,9 +17,9 @@ import {
   showPreviousCountries,
   updateDebounceText,
 } from "./helperFunctions/helperFunctions";
-import { Countries } from "./Classes/Countries";
-import { DarkMode } from "./Classes/DarkMode";
-import { Router } from "./Router/Router";
+import { Countries } from "/Classes/Countries";
+import { DarkMode } from "/Classes/DarkMode";
+import { Router } from "/Router/Router";
 export const router = new Router();
 
 

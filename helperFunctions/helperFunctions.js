@@ -7,7 +7,6 @@ import {
   brightnessText,
   firstPageBtn,
   countries,
-  main,
   searchBarContainer,
   renderedCountry,
   countryApp,
@@ -124,7 +123,6 @@ export const showCountryInformation = (list, obj) => {
   country.classList.add("country__information");
   country.innerHTML = `
   <div class="container__information">
-
   <div class="return__information">
   <div class="return__information__children">
   <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-6 h-6">
@@ -133,10 +131,8 @@ export const showCountryInformation = (list, obj) => {
   <span class="go__back">Go back</span>
   </div>
   </div>
-
   <div class="main__information">
   <img src="${obj.flags.svg}">
-
   <div class="informations">
   <p>Official Name: ${obj.name.official}</p>
   <p>Continent: ${obj.continents[0]}</p>
@@ -145,11 +141,8 @@ export const showCountryInformation = (list, obj) => {
   <p>Population: ${obj.population.toLocaleString()}</p>
   <p>Capital: ${obj.capital}</p>
   <p>Currency: ${firstCurrency.name} </p>
-  
   </div>
-  
   </div>
-
   </div>
   `;
   list.appendChild(country);
@@ -173,7 +166,7 @@ export const showCountry = async (e) => {
   const [countryObj] = await findCountry(
     `https://restcountries.com/v3.1/name/${countryName}`
   );
-  const countryCode = countryObj.cca3;
+  const countryCode = countryObj.name.common;
   router.go(countryCode);
   countryList.style.display = "none";
   searchBarContainer.style.display = "none";
