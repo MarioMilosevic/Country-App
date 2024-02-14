@@ -16,6 +16,8 @@ import {
   goBackDark,
   goBackLight,
   showPreviousCountries,
+  debounce,
+  updateDebounceText,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -24,10 +26,10 @@ import { Router } from "./Router/Router";
 export const router = new Router();
 
 window.addEventListener("DOMContentLoaded", function () {
-  console.log("loaded");
+  // console.log("loaded");
   router.init();
-  console.log(history);
-  console.log(window.location);
+  // console.log(history);
+  // console.log(window.location);
 });
 
 export const main = document.querySelector("main");
@@ -81,6 +83,7 @@ countryRegion.addEventListener("change", async () => {
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
     renderPageButtons(responseAll, pageNumbers);
+
     firstPageBtn.classList.add("selected");
   } else {
     const response = await findCountry(url);
@@ -92,21 +95,48 @@ countryRegion.addEventListener("change", async () => {
     toggleLiBackgroundColor(liItems);
     renderPageButtons(response, pageNumbers);
     pageClickedHandler(firstPageBtn);
+    firstPageBtn.classList.add("clickedDark", "clicked");
   }
 });
 
-countrySearch.addEventListener("input", function () {
-  console.log('nesto');
-  const currentCountries = countries.getCountries();
-  const search = countrySearch.value.toLowerCase();
-  const searchedCountries = currentCountries.filter((country) =>
-    country.name.common.toLowerCase().includes(search)
-  );
-  countryList.innerHTML = "";
-  showCountries(searchedCountries);
-  const liItems = document.querySelectorAll(".country__list__item");
-  toggleLiBackgroundColor(liItems);
-  renderPageButtons(searchedCountries, pageNumbers);
+countrySearch.addEventListener("input", async function () {
+  updateDebounceText(async () => {
+    const searchName = countrySearch.value.toLowerCase();
+    if (searchName.length > 0) {
+      const urlCountryName = `https://restcountries.com/v3.1/name/${searchName}`;
+      let searchedCountries = await findCountry(urlCountryName);
+      countries.setCountries(searchedCountries);
+      countries.sortCountries();
+      countryList.innerHTML = "";
+      showCountries(countries.get24Countries("1").sort());
+      const liItems = document.querySelectorAll(".country__list__item");
+      toggleLiBackgroundColor(liItems);
+      renderPageButtons(searchedCountries, pageNumbers);
+      const firstPageBtn = document.querySelector(".listBtn");
+      firstPageBtn.classList.add("clickedDark", "clicked");
+    }
+    if (searchName.length < 1) {
+      const urlAll = "https://restcountries.com/v3.1/all";
+      let searchedCountries = await findCountry(urlAll);
+      console.log("ispod 1");
+      countryList.innerHTML = "";
+      countries.setCountries(searchedCountries);
+      countries.sortCountries();
+      showCountries(countries.get24Countries("1").sort());
+      const liItems = document.querySelectorAll(".country__list__item");
+      toggleLiBackgroundColor(liItems);
+      renderPageButtons(searchedCountries, pageNumbers);
+      const firstPageBtn = document.querySelector(".listBtn");
+      firstPageBtn.classList.add("clickedDark", "clicked");
+    }
+  });
+  // const currentCountries = countries.getCountries();
+  // const search = countrySearch.value.toLowerCase();
+  // const searchedCountries = currentCountries.filter((country) =>
+  //   country.name.common.toLowerCase().includes(search)
+  // );
+
+  // VALJA SAMO DA NE BAGUJE SAD
 });
 
 pageList.addEventListener("click", function (e) {
@@ -191,7 +221,7 @@ function onBackButtonEvent(e) {
   // var currentLocation = window.location.pathname;
   console.log("aaaaaaaaaaa");
   history.pushState(null, null, "firstPage");
-  showPreviousCountries()
+  showPreviousCountries();
 }
 
 window.addEventListener("popstate", onBackButtonEvent);

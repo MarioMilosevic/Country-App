@@ -18,7 +18,7 @@ export const showCountries = (arr) => {
     const country = document.createElement("li");
     country.classList.add("country__list__item");
     country.innerHTML = `<img src="${obj.flags.svg}">
-      <h2 class="country__name">${obj.name.common}</h2>
+      <h2 class="country__name">${obj.name.official}</h2>
       `;
     countryList.appendChild(country);
   });
@@ -160,7 +160,7 @@ export const showCountryInformation = (list, obj) => {
 export const showPreviousCountries = (e) => {
   console.log(window.location.href);
   // window.location.href = "mario"
-  history.pushState({page:1}, "First page", "firstPage");
+  history.pushState({ page: 1 }, "First page", "firstPage");
   showCountries(countries.getCountries());
   countryList.style.display = "grid";
   searchBarContainer.style.display = "flex";
@@ -171,7 +171,6 @@ export const showPreviousCountries = (e) => {
 };
 
 export const showCountry = async (e) => {
- 
   const target = e.target.closest(".country__list__item");
   const countryName = target.querySelector("h2").textContent;
   const [countryObj] = await findCountry(
@@ -187,3 +186,21 @@ export const showCountry = async (e) => {
   console.log(history);
   console.log(window.location);
 };
+
+export const debounce = (cb, delay = 1000) => {
+  let timeout;
+  return (...args) => {
+    clearTimeout(timeout);
+    timeout = setTimeout(() => {
+      cb(...args);
+    }, delay);
+  };
+};
+export const updateDebounceText = debounce((cb) => {
+  cb()
+}, 500);
+
+// countrySearch.addEventListener("input", function () {
+//   updateDebounceText(countrySearch.value);
+// });
+
