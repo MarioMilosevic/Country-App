@@ -16,10 +16,10 @@ import {
   goBackLight,
   showPreviousCountries,
   updateDebounceText,
-} from "/helperFunctions/helperFunctions";
-import { Countries } from "/Classes/Countries";
-import { DarkMode } from "/Classes/DarkMode";
-import { Router } from "./router";
+} from "./helperFunctions/helperFunctions";
+import { Countries } from "./Classes/Countries";
+import { DarkMode } from "./Classes/DarkMode";
+import Router from "./router";
 import { url } from "./constants";
 
 const brightness = document.querySelector("#brightness");

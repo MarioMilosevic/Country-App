@@ -1,6 +1,6 @@
 "use strict";
 
-export class Router {
+class Router {
   constructor() {}
 
   init() {
@@ -16,5 +16,6 @@ export class Router {
   go(route) {
     history.pushState({ route }, "", route);
   }
-
 }
+
+export default Router;
