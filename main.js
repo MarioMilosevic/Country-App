@@ -11,26 +11,18 @@ import {
   darkButton,
   lightButton,
   pageClickedHandler,
-  showCountryInformation,
   showCountry,
   goBackDark,
   goBackLight,
   showPreviousCountries,
-  debounce,
   updateDebounceText,
 } from "./helperFunctions/helperFunctions";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
 import { Router } from "./Router/Router";
-
 export const router = new Router();
 
-window.addEventListener("DOMContentLoaded", function () {
-  // console.log("loaded");
-  router.init();
-  // console.log(history);
-  // console.log(window.location);
-});
+
 
 export const main = document.querySelector("main");
 const brightness = document.querySelector("#brightness");
@@ -53,6 +45,10 @@ let page = 0;
 const previousPage = document.querySelector(".previousPage");
 const nextPage = document.querySelector(".nextPage");
 
+window.addEventListener("DOMContentLoaded", function () {
+  router.init();
+});
+
 const fetchedCountries = await findCountry(
   "https://restcountries.com/v3.1/all"
 );
@@ -62,10 +58,8 @@ countries.sortCountries();
 
 showCountries(countries.get24Countries("1").sort());
 renderPageButtons(countries.getCountries(), pageNumbers);
-// ///////////////////////////////////////////////////////////////////////////////////////////////
 countryList.addEventListener("click", (e) => showCountry(e));
 
-/////////////////////////////////////////////////////////
 export const firstPageBtn = document.querySelector(".listBtn");
 const pageButtons = document.querySelectorAll(".listBtn");
 firstPageBtn.classList.add("clickedDark", "clicked");
@@ -83,7 +77,6 @@ countryRegion.addEventListener("change", async () => {
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
     renderPageButtons(responseAll, pageNumbers);
-
     firstPageBtn.classList.add("selected");
   } else {
     const response = await findCountry(url);
@@ -118,7 +111,6 @@ countrySearch.addEventListener("input", async function () {
     if (searchName.length < 1) {
       const urlAll = "https://restcountries.com/v3.1/all";
       let searchedCountries = await findCountry(urlAll);
-      console.log("ispod 1");
       countryList.innerHTML = "";
       countries.setCountries(searchedCountries);
       countries.sortCountries();
@@ -130,13 +122,6 @@ countrySearch.addEventListener("input", async function () {
       firstPageBtn.classList.add("clickedDark", "clicked");
     }
   });
-  // const currentCountries = countries.getCountries();
-  // const search = countrySearch.value.toLowerCase();
-  // const searchedCountries = currentCountries.filter((country) =>
-  //   country.name.common.toLowerCase().includes(search)
-  // );
-
-  // VALJA SAMO DA NE BAGUJE SAD
 });
 
 pageList.addEventListener("click", function (e) {
@@ -216,58 +201,9 @@ nextPage.addEventListener("click", function () {
   }
 });
 
-function onBackButtonEvent(e) {
-  e.preventDefault();
-  // var currentLocation = window.location.pathname;
-  console.log("aaaaaaaaaaa");
+function onBackButtonEvent() {
   history.pushState(null, null, "firstPage");
   showPreviousCountries();
 }
 
 window.addEventListener("popstate", onBackButtonEvent);
-
-// Cleanup
-// window.addEventListener("popstate", onBackButtonEvent);
-
-// window.addEventListener("popstate", (event) => {
-//   // router.init()
-//   console.log(
-//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
-//   );
-//   console.log('popstate');
-//   // history.pushState({ page: 1 }, "title 1", "?page=1");
-// });
-
-// const popStateEvent = new PopStateEvent("popstate", { state: history.state });
-// window.dispatchEvent(popStateEvent);
-
-// window.addEventListener("popstate", (event) => {
-//   console.log(
-//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`
-//   );
-// });
-
-// window.addEventListener("popstate", (event) => {
-//   console.log(
-//     `location: ${document.location}, state: ${JSON.stringify(event.state)}`,
-//   );
-// });
-// history.pushState({ page: 1 }, "title 1", "?page=1");
-
-// history.pushState({ page: 1 }, "title 1", "?page=1");
-// history.pushState({ page: 2 }, "title 2", "?page=2");
-// history.replaceState({ page: 3 }, "title 3", "?page=3");
-// history.back(); // Logs "location: http://example.com/example.html?page=1, state: {"page":1}"
-// history.back(); // Logs "location: http://example.com/example.html, state: null"
-// history.go(2); // Logs "location: http://example.com/example.html?page=3, state: {"page":3}"
-
-// window.addEventListener("DOMContentLoaded", async () => {
-//   app.router = router;
-//   // app.router.init();
-// });
-
-// const dugme = document.querySelector(".test");
-// dugme.addEventListener("click", function () {
-//   // app.router.go("sir", true);
-//   // history.pushState({ page:1 }, "", "sir");
-// });

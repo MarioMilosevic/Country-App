@@ -44,6 +44,7 @@ export const findCountry = async function (url) {
     return returnedCountries;
   } catch (error) {
     console.log("Error fetching data:", error);
+    alert(`Error fetching data: ${error}`);
   }
 };
 
@@ -157,17 +158,13 @@ export const showCountryInformation = (list, obj) => {
   countryApp.addEventListener("click", showPreviousCountries);
 };
 
-export const showPreviousCountries = (e) => {
-  console.log(window.location.href);
-  // window.location.href = "mario"
+export const showPreviousCountries = () => {
   history.pushState({ page: 1 }, "First page", "firstPage");
   showCountries(countries.getCountries());
   countryList.style.display = "grid";
   searchBarContainer.style.display = "flex";
   pageList.style.display = "grid";
   renderedCountry.style.display = "none";
-  console.log(history);
-  console.log(window.location);
 };
 
 export const showCountry = async (e) => {
@@ -183,8 +180,6 @@ export const showCountry = async (e) => {
   pageList.style.display = "none";
   renderedCountry.style.display = "block";
   showCountryInformation(renderedCountry, countryObj);
-  console.log(history);
-  console.log(window.location);
 };
 
 export const debounce = (cb, delay = 1000) => {
@@ -197,10 +192,5 @@ export const debounce = (cb, delay = 1000) => {
   };
 };
 export const updateDebounceText = debounce((cb) => {
-  cb()
+  cb();
 }, 500);
-
-// countrySearch.addEventListener("input", function () {
-//   updateDebounceText(countrySearch.value);
-// });
-
