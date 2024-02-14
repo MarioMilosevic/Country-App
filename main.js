@@ -71,6 +71,7 @@ countryRegion.addEventListener("change", async () => {
   const url = `https://restcountries.com/v3.1/region/${region}`;
   if (region === "All") {
     const responseAll = await findCountry(urlAll);
+    router.go("firstPage")
     countries.setCountries(responseAll);
     countries.sortCountries();
     showCountries(countries.get24Countries("1"));
@@ -80,6 +81,7 @@ countryRegion.addEventListener("change", async () => {
     firstPageBtn.classList.add("selected");
   } else {
     const response = await findCountry(url);
+    router.go(region)
     countries.setCountries(response);
     countries.sortCountries();
     showCountries(countries.get24Countries("1").sort());
