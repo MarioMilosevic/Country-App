@@ -28,14 +28,14 @@
   font-size: 1.3rem;
   border-radius: 1.6rem;
   cursor: pointer;
-  transition: ease-out 500ms;
+  transition: ease-out 100ms;
 }
 
 .country__list__item img {
   max-width: 20rem;
   max-height: 10rem;
   box-shadow: rgba(149, 157, 165, 1) 0px 8px 24px;
-  transition: ease-out 500ms;
+  transition: ease-out 100ms;
 }
 .country__list__item h2 {
   text-align: center;
@@ -72,7 +72,7 @@
   padding: 2rem 0;
 }
 
-.return__information__children{
+.return__information__children {
   padding: 1rem;
   display: flex;
   font-size: 1.4rem;
@@ -82,13 +82,9 @@
   background-color: var(--secondary--color);
 }
 
-
-
 .main__information {
   display: flex;
-  /* justify-content: center; */
   gap: 1rem;
-  /* margin: 0 auto; */
 }
 
 .main__information img {

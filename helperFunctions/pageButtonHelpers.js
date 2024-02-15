@@ -1,6 +1,6 @@
 "use strict";
 import { firstPageBtn, darkMode } from "../main";
-import { darkButton,lightButton } from "./colorHelpers";
+import { darkElement,lightElement } from "./colorHelpers";
 
 export const renderPageButtons = (arr, list) => {
   list.innerHTML = "";
@@ -29,9 +29,9 @@ export const pageClickedHandler = (target) => {
   const allPageBtns = document.querySelectorAll(".listBtn");
   allPageBtns.forEach((btn) => {
     btn.classList.remove("clicked");
-    darkMode.getDarkMode() ? darkButton(btn) : lightButton(btn);
+    darkMode.getDarkMode() ? darkElement(btn) : lightElement(btn);
   });
 
   target.classList.add("clicked");
-  darkMode.getDarkMode() ? lightButton(target) : darkButton(target);
+  darkMode.getDarkMode() ? lightElement(target) : darkElement(target);
 };

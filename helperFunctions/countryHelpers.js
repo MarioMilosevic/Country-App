@@ -12,7 +12,7 @@ import {
   pageNumbers,
 } from "../main";
 
-import { toggleLiBackgroundColor } from "./colorHelpers";
+import { darkElement, lightElement, toggleItemsBackgroundColor } from "./colorHelpers";
 import { renderPageButtons } from "./pageButtonHelpers";
 export const showCountries = (arr) => {
   arr.forEach((obj) => {
@@ -51,6 +51,8 @@ export const showCountryInformation = (list, obj) => {
   const country = createCountry(obj, customObjProps);
   list.appendChild(country);
   const goBackBtn = country.querySelector(".return__information__children");
+  
+  darkMode.getDarkMode() ? darkElement(goBackBtn) : lightElement(goBackBtn)
   goBackBtn.addEventListener("click", showPreviousCountries);
   countryApp.addEventListener("click", showPreviousCountries);
 };
@@ -101,7 +103,7 @@ export const renderFetchedCountries = async (url) => {
   countries.sortCountries();
   showCountries(countries.getCountriesByAmount("1"));
   const liItems = document.querySelectorAll(".country__list__item");
-  toggleLiBackgroundColor(liItems);
+  toggleItemsBackgroundColor(liItems);
   renderPageButtons(response, pageNumbers);
 };
 

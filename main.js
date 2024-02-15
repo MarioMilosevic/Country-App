@@ -2,13 +2,11 @@
 import { updateDebounceText } from "./helperFunctions/helperFunctions";
 
 import {
-  toggleLiBackgroundColor,
+  toggleItemsBackgroundColor,
   toggleBrightnessImg,
   toggleBrightnessText,
-  darkButton,
-  lightButton,
-  goBackDark,
-  goBackLight,
+  darkElement,
+  lightElement,
 } from "./helperFunctions/colorHelpers";
 
 import {
@@ -103,7 +101,7 @@ pageList.addEventListener("click", function (e) {
     countryList.innerHTML = "";
     showCountries(countries.getCountriesByAmount(pageNumber));
     const liItems = document.querySelectorAll(".country__list__item");
-    toggleLiBackgroundColor(liItems);
+    toggleItemsBackgroundColor(liItems);
   }
 });
 
@@ -112,22 +110,23 @@ brightness.addEventListener("click", function () {
   darkMode.toggleMode();
   toggleCountryAppLogo(countryImg);
   const liItems = document.querySelectorAll(".country__list__item");
-  toggleLiBackgroundColor(liItems);
+  toggleItemsBackgroundColor(liItems);
   toggleBrightnessImg();
   toggleBrightnessText();
   togglePageNumbersColor(pageButtons);
   const selectedPageBtn = document.querySelector(".clicked");
+  console.log(selectedPageBtn);
   darkMode.getDarkMode()
-    ? lightButton(selectedPageBtn)
-    : darkButton(selectedPageBtn);
+    ? lightElement(selectedPageBtn)
+    : darkElement(selectedPageBtn);
 
   const returnInformationChildren = document.querySelector(
     ".return__information__children"
   );
   if (returnInformationChildren) {
     darkMode.getDarkMode()
-      ? goBackDark(returnInformationChildren)
-      : goBackLight(returnInformationChildren);
+      ? darkElement(returnInformationChildren)
+      : lightElement(returnInformationChildren);
   }
 });
 
@@ -140,14 +139,14 @@ previousPage.addEventListener("click", function () {
 
     selectedPageBtn.classList.remove("clicked");
     darkMode.getDarkMode()
-      ? darkButton(selectedPageBtn)
-      : lightButton(selectedPageBtn);
+      ? darkElement(selectedPageBtn)
+      : lightElement(selectedPageBtn);
 
     const previousPageBtn = selectedPageBtn.previousElementSibling;
     previousPageBtn.classList.add("clicked");
     darkMode.getDarkMode()
-      ? lightButton(previousPageBtn)
-      : darkButton(previousPageBtn);
+      ? lightElement(previousPageBtn)
+      : darkElement(previousPageBtn);
     page--;
   }
 });
@@ -162,12 +161,14 @@ nextPage.addEventListener("click", function () {
 
     selectedPageBtn.classList.remove("clicked");
     darkMode.getDarkMode()
-      ? darkButton(selectedPageBtn)
-      : lightButton(selectedPageBtn);
+      ? darkElement(selectedPageBtn)
+      : lightElement(selectedPageBtn);
 
     const nextPageBtn = selectedPageBtn.nextElementSibling;
     nextPageBtn.classList.add("clicked");
-    darkMode.getDarkMode() ? lightButton(nextPageBtn) : darkButton(nextPageBtn);
+    darkMode.getDarkMode()
+      ? lightElement(nextPageBtn)
+      : darkElement(nextPageBtn);
     page++;
   }
 });
@@ -178,3 +179,6 @@ function onBackButtonEvent() {
 }
 
 window.addEventListener("popstate", onBackButtonEvent);
+
+// 1. na dark mode go back dugme da mu dodam DARK i LIGHT klase
+// 2. da dugmice kada je dark mode, isto dodam DARK i LIGHT klase
