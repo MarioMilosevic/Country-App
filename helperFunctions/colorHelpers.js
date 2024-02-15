@@ -22,17 +22,7 @@ export const toggleBrightnessImg = () => {
     element.style.backgroundColor = "#1f2937";
     element.style.color = "#fff";
   };
-  // export const goBackDark = (element) => {
-  //   element.style.backgroundColor = "#1f2937";
-  //   element.style.color = "#fff";
-  // };
-
-  // export const goBackLight = (element) => {
-  //   element.style.backgroundColor = "#ffffff";
-  //   element.style.color = "#000000";
-  // };
-  
-  
+ 
   export const toggleItemsBackgroundColor = (arr) => {
     const shadow = "rgba(149, 157, 165, 0.2) 0px 8px 24px";
     arr.forEach((li) => {

@@ -17,12 +17,6 @@ export const renderPageButtons = (arr, list) => {
   pageBtn.classList.add("clickedDark", "clicked");
 };
 
-export const togglePageNumbersColor = (buttons) => {
-  buttons.forEach((btn) => {
-    btn.style.backgroundColor = darkMode.getDarkMode() ? "#1f2937" : "#fff";
-    btn.style.color = darkMode.getDarkMode() ? "#ffffff" : "#000000";
-  });
-};
 
 export const pageClickedHandler = (target) => {
   firstPageBtn.classList.remove("clickedDark");
@@ -31,7 +25,23 @@ export const pageClickedHandler = (target) => {
     btn.classList.remove("clicked");
     darkMode.getDarkMode() ? darkElement(btn) : lightElement(btn);
   });
-
+  
   target.classList.add("clicked");
   darkMode.getDarkMode() ? lightElement(target) : darkElement(target);
 };
+
+export const toggleAllPageNumbersColor = (buttons) => {
+  buttons.forEach((btn) => {
+    btn.style.backgroundColor = darkMode.getDarkMode() ? "#1f2937" : "#fff";
+    btn.style.color = darkMode.getDarkMode() ? "#ffffff" : "#000000";
+  });
+};
+
+export const togglePageNumbersColor = () => {
+  const renderedPageButtons = document.querySelectorAll('.listBtn')
+  toggleAllPageNumbersColor(renderedPageButtons);
+  const selectedPageBtn = document.querySelector(".clicked");
+  darkMode.getDarkMode()
+    ? lightElement(selectedPageBtn)
+    : darkElement(selectedPageBtn);
+}

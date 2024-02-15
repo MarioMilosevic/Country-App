@@ -12,7 +12,7 @@ import {
 import {
   renderPageButtons,
   pageClickedHandler,
-  togglePageNumbersColor,
+  toggleAllPageNumbersColor,
 } from "./helperFunctions/pageButtonHelpers";
 
 import {
@@ -113,7 +113,9 @@ brightness.addEventListener("click", function () {
   toggleItemsBackgroundColor(liItems);
   toggleBrightnessImg();
   toggleBrightnessText();
-  togglePageNumbersColor(pageButtons);
+
+  const renderedPageButtons = document.querySelectorAll(".listBtn");
+  toggleAllPageNumbersColor(renderedPageButtons);
   const selectedPageBtn = document.querySelector(".clicked");
   console.log(selectedPageBtn);
   darkMode.getDarkMode()
@@ -136,12 +138,10 @@ previousPage.addEventListener("click", function () {
   if (page > 1) {
     countryList.innerHTML = "";
     showCountries(countries.getCountriesByAmount(page - 1));
-
     selectedPageBtn.classList.remove("clicked");
     darkMode.getDarkMode()
       ? darkElement(selectedPageBtn)
       : lightElement(selectedPageBtn);
-
     const previousPageBtn = selectedPageBtn.previousElementSibling;
     previousPageBtn.classList.add("clicked");
     darkMode.getDarkMode()
@@ -154,7 +154,6 @@ previousPage.addEventListener("click", function () {
 nextPage.addEventListener("click", function () {
   const selectedPageBtn = document.querySelector(".clicked");
   page = Number(selectedPageBtn.id);
-
   if (page < pageButtons.length) {
     countryList.innerHTML = "";
     showCountries(countries.getCountriesByAmount(page + 1));
@@ -179,6 +178,3 @@ function onBackButtonEvent() {
 }
 
 window.addEventListener("popstate", onBackButtonEvent);
-
-// 1. na dark mode go back dugme da mu dodam DARK i LIGHT klase
-// 2. da dugmice kada je dark mode, isto dodam DARK i LIGHT klase

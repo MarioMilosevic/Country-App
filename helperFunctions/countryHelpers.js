@@ -12,8 +12,16 @@ import {
   pageNumbers,
 } from "../main";
 
-import { darkElement, lightElement, toggleItemsBackgroundColor } from "./colorHelpers";
-import { renderPageButtons } from "./pageButtonHelpers";
+import {
+  darkElement,
+  lightElement,
+  toggleItemsBackgroundColor,
+} from "./colorHelpers";
+import {
+  renderPageButtons,
+  togglePageNumbersColor,
+} from "./pageButtonHelpers";
+
 export const showCountries = (arr) => {
   arr.forEach((obj) => {
     const country = document.createElement("li");
@@ -51,8 +59,8 @@ export const showCountryInformation = (list, obj) => {
   const country = createCountry(obj, customObjProps);
   list.appendChild(country);
   const goBackBtn = country.querySelector(".return__information__children");
-  
-  darkMode.getDarkMode() ? darkElement(goBackBtn) : lightElement(goBackBtn)
+
+  darkMode.getDarkMode() ? darkElement(goBackBtn) : lightElement(goBackBtn);
   goBackBtn.addEventListener("click", showPreviousCountries);
   countryApp.addEventListener("click", showPreviousCountries);
 };
@@ -89,11 +97,13 @@ const createCountry = (obj, props) => {
 
 export const showPreviousCountries = () => {
   history.pushState({ page: 1 }, "Home page", "HomePage");
-  showCountries(countries.getCountries());
+  showCountries(countries.getCountriesByAmount("1", countries.getCountries()));
+
   countryList.style.display = "grid";
   searchBarContainer.style.display = "flex";
-  pageList.style.display = "grid";
+  pageList.style.display = "flex";
   renderedCountry.style.display = "none";
+  togglePageNumbersColor();
 };
 
 export const renderFetchedCountries = async (url) => {
@@ -105,9 +115,8 @@ export const renderFetchedCountries = async (url) => {
   const liItems = document.querySelectorAll(".country__list__item");
   toggleItemsBackgroundColor(liItems);
   renderPageButtons(response, pageNumbers);
+  togglePageNumbersColor();
 };
-
-
 
 export const showCountry = async (e) => {
   const target = e.target.closest(".country__list__item");
