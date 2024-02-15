@@ -8,6 +8,7 @@ import {
   renderedCountry,
   countryApp,
   countries,
+  darkMode
 } from "../main";
 export const showCountries = (arr) => {
   arr.forEach((obj) => {

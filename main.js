@@ -1,17 +1,22 @@
 "use strict";
+import { updateDebounceText } from "./helperFunctions/helperFunctions";
+
 import {
   toggleLiBackgroundColor,
   toggleBrightnessImg,
   toggleBrightnessText,
-  renderPageButtons,
-  togglePageNumbersColor,
   darkButton,
   lightButton,
-  pageClickedHandler,
   goBackDark,
   goBackLight,
-  updateDebounceText,
-} from "./helperFunctions/helperFunctions";
+} from "./helperFunctions/colorHelpers";
+
+import {
+  renderPageButtons,
+  pageClickedHandler,
+  togglePageNumbersColor,
+} from "./helperFunctions/pageButtonHelpers";
+
 import {
   showCountries,
   findCountry,
@@ -83,7 +88,6 @@ countryRegion.addEventListener("change", async () => {
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
     renderPageButtons(response, pageNumbers);
-    console.log(firstPageBtn);
     firstPageBtn = document.querySelector(".listBtn");
     firstPageBtn.classList.add("clickedDark", "clicked");
   } else {
@@ -96,7 +100,7 @@ countryRegion.addEventListener("change", async () => {
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
     renderPageButtons(response, pageNumbers);
-    firstPageBtn = document.querySelector('.listBtn')
+    firstPageBtn = document.querySelector(".listBtn");
     pageClickedHandler(firstPageBtn);
     firstPageBtn.classList.add("clickedDark", "clicked");
   }
