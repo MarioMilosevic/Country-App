@@ -15,9 +15,9 @@ export class Countries {
     return this.countries;
   }
 
-  get24Countries(input) {
-    const b = input * 24;
-    const a = b - 24;
+  getCountriesByAmount(input, amount = 24) {
+    const b = input * amount;
+    const a = b - amount;
     const customArr = this.countries.slice(a, b);
     return customArr;
   }
