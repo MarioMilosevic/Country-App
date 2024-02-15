@@ -8,8 +8,12 @@ import {
   renderedCountry,
   countryApp,
   countries,
-  darkMode
+  darkMode,
+  pageNumbers,
 } from "../main";
+
+import { toggleLiBackgroundColor } from "./colorHelpers";
+import { renderPageButtons } from "./pageButtonHelpers";
 export const showCountries = (arr) => {
   arr.forEach((obj) => {
     const country = document.createElement("li");
@@ -39,9 +43,19 @@ export const toggleCountryAppLogo = (img) => {
 };
 
 export const showCountryInformation = (list, obj) => {
-  const firstCurrency = Object.values(obj.currencies)[0];
-  const firstLanguage = Object.values(obj.languages)[0];
+  const customObjProps = {
+    firstCurrency: Object.values(obj.currencies)[0],
+    firstLanguage: Object.values(obj.languages)[0],
+  };
   list.innerHTML = "";
+  const country = createCountry(obj, customObjProps);
+  list.appendChild(country);
+  const goBackBtn = country.querySelector(".return__information__children");
+  goBackBtn.addEventListener("click", showPreviousCountries);
+  countryApp.addEventListener("click", showPreviousCountries);
+};
+
+const createCountry = (obj, props) => {
   const country = document.createElement("div");
   country.classList.add("country__information");
   country.innerHTML = `
@@ -59,19 +73,16 @@ export const showCountryInformation = (list, obj) => {
     <div class="informations">
     <p>Official Name: ${obj.name.official}</p>
     <p>Continent: ${obj.continents[0]}</p>
-    <p>Languages: ${firstLanguage}</p>
+    <p>Languages: ${props.firstLanguage}</p>
     <p>Area: ${obj.area} km<sup>2</sup></p>
     <p>Population: ${obj.population.toLocaleString()}</p>
     <p>Capital: ${obj.capital}</p>
-    <p>Currency: ${firstCurrency.name} </p>
+    <p>Currency: ${props.firstCurrency.name} </p>
     </div>
     </div>
     </div>
     `;
-  list.appendChild(country);
-  const goBackBtn = country.querySelector(".return__information__children");
-  goBackBtn.addEventListener("click", showPreviousCountries);
-  countryApp.addEventListener("click", showPreviousCountries);
+  return country;
 };
 
 export const showPreviousCountries = () => {
@@ -82,6 +93,19 @@ export const showPreviousCountries = () => {
   pageList.style.display = "grid";
   renderedCountry.style.display = "none";
 };
+
+export const renderFetchedCountries = async (url) => {
+  let response = await findCountry(url);
+  countryList.innerHTML = "";
+  countries.setCountries(response);
+  countries.sortCountries();
+  showCountries(countries.getCountriesByAmount("1"));
+  const liItems = document.querySelectorAll(".country__list__item");
+  toggleLiBackgroundColor(liItems);
+  renderPageButtons(response, pageNumbers);
+};
+
+
 
 export const showCountry = async (e) => {
   const target = e.target.closest(".country__list__item");

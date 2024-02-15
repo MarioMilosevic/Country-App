@@ -23,6 +23,7 @@ import {
   toggleCountryAppLogo,
   showCountry,
   showPreviousCountries,
+  renderFetchedCountries,
 } from "./helperFunctions/countryHelpers";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
@@ -67,7 +68,6 @@ export let firstPageBtn;
   countries.sortCountries();
   showCountries(countries.getCountriesByAmount("1"));
   renderPageButtons(countries.getCountries(), pageNumbers);
-
   firstPageBtn = document.querySelector(".listBtn");
   firstPageBtn.classList.add("clickedDark", "clicked");
 })();
@@ -79,64 +79,19 @@ countryRegion.addEventListener("change", async () => {
   countryList.innerHTML = "";
   const urlAll = `${url}/all`;
   const urlRegion = `${url}/region/${region}`;
-  if (region === "All") {
-    const response = await findCountry(urlAll);
-    router.go("Home Page");
-    countries.setCountries(response);
-    countries.sortCountries();
-    showCountries(countries.getCountriesByAmount("1"));
-    const liItems = document.querySelectorAll(".country__list__item");
-    toggleLiBackgroundColor(liItems);
-    renderPageButtons(response, pageNumbers);
-    firstPageBtn = document.querySelector(".listBtn");
-    firstPageBtn.classList.add("clickedDark", "clicked");
-  } else {
-    const response = await findCountry(urlRegion);
-    router.go(region);
-    countries.setCountries(response);
-    countries.sortCountries();
-    showCountries(countries.getCountriesByAmount("1"));
-    pageNumbers.innerHTML = "";
-    const liItems = document.querySelectorAll(".country__list__item");
-    toggleLiBackgroundColor(liItems);
-    renderPageButtons(response, pageNumbers);
-    firstPageBtn = document.querySelector(".listBtn");
-    pageClickedHandler(firstPageBtn);
-    firstPageBtn.classList.add("clickedDark", "clicked");
-  }
+  region === "All"
+    ? renderFetchedCountries(urlAll)
+    : renderFetchedCountries(urlRegion);
 });
 
 countrySearch.addEventListener("input", async function () {
   updateDebounceText(async () => {
     const searchName = countrySearch.value.toLowerCase();
-    if (searchName.length > 0) {
-      const urlCountryName = `${url}/name/${searchName}`;
-      let searchedCountries = await findCountry(urlCountryName);
-      // ///////////////////
-      countries.setCountries(searchedCountries);
-      countries.sortCountries();
-      countryList.innerHTML = "";
-      showCountries(countries.getCountriesByAmount("1"));
-      const liItems = document.querySelectorAll(".country__list__item");
-      toggleLiBackgroundColor(liItems);
-      renderPageButtons(searchedCountries, pageNumbers);
-      firstPageBtn = document.querySelector(".listBtn");
-      firstPageBtn.classList.add("clickedDark", "clicked");
-    }
-    if (searchName.length < 1) {
-      const urlAll = `${url}/all`;
-      let searchedCountries = await findCountry(urlAll);
-
-      countryList.innerHTML = "";
-      countries.setCountries(searchedCountries);
-      countries.sortCountries();
-      showCountries(countries.getCountriesByAmount("1"));
-      const liItems = document.querySelectorAll(".country__list__item");
-      toggleLiBackgroundColor(liItems);
-      renderPageButtons(searchedCountries, pageNumbers);
-      firstPageBtn = document.querySelector(".listBtn");
-      firstPageBtn.classList.add("clickedDark", "clicked");
-    }
+    const urlCountryName = `${url}/name/${searchName}`;
+    const urlAll = `${url}/all`;
+    searchName.length > 0
+      ? renderFetchedCountries(urlCountryName)
+      : renderFetchedCountries(urlAll);
   });
 });
 

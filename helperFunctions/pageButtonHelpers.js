@@ -1,6 +1,7 @@
 "use strict";
 import { firstPageBtn, darkMode } from "../main";
 import { darkButton,lightButton } from "./colorHelpers";
+
 export const renderPageButtons = (arr, list) => {
   list.innerHTML = "";
   const length = arr.length;
@@ -12,6 +13,8 @@ export const renderPageButtons = (arr, list) => {
     button.textContent = i + 1;
     list.appendChild(button);
   }
+  const pageBtn = document.querySelector('.listBtn')
+  pageBtn.classList.add("clickedDark", "clicked");
 };
 
 export const togglePageNumbersColor = (buttons) => {
