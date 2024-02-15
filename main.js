@@ -12,12 +12,18 @@ import {
   goBackLight,
   updateDebounceText,
 } from "./helperFunctions/helperFunctions";
-  import { showCountries, findCountry, toggleCountryAppLogo, showCountry, showPreviousCountries} from "./helperFunctions/countryHelpers";
+import {
+  showCountries,
+  findCountry,
+  toggleCountryAppLogo,
+  showCountry,
+  showPreviousCountries,
+} from "./helperFunctions/countryHelpers";
 import { Countries } from "./Classes/Countries";
 import { DarkMode } from "./Classes/DarkMode";
 import Router from "./router";
-import { url } from "./constants";
 
+const url = `https://restcountries.com/v3.1`;
 const brightness = document.querySelector("#brightness");
 const countryRegion = document.querySelector(".country__region");
 const countryImg = document.querySelector("#country__app__logo");
@@ -46,10 +52,6 @@ window.addEventListener("DOMContentLoaded", function () {
   router.init();
 });
 
-// const fetcher = async () => {
-//   const fetchedCountries = await findCountry(`${url}/all`);
-//   return fetchedCountries
-// }
 let fetchedCountries;
 
 export let firstPageBtn;
@@ -58,10 +60,10 @@ export let firstPageBtn;
   fetchedCountries = await findCountry(`${url}/all`);
   countries.setCountries(fetchedCountries);
   countries.sortCountries();
-  showCountries(countries.getCountriesByAmount("1").sort());
+  showCountries(countries.getCountriesByAmount("1"));
   renderPageButtons(countries.getCountries(), pageNumbers);
 
-  const firstPageBtn = document.querySelector(".listBtn");
+  firstPageBtn = document.querySelector(".listBtn");
   firstPageBtn.classList.add("clickedDark", "clicked");
 })();
 
@@ -71,27 +73,30 @@ countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
   countryList.innerHTML = "";
   const urlAll = `${url}/all`;
-  const url = `${url}/region/${region}`;
+  const urlRegion = `${url}/region/${region}`;
   if (region === "All") {
-    const responseAll = await findCountry(urlAll);
-    router.go("firstPage");
-    countries.setCountries(responseAll);
+    const response = await findCountry(urlAll);
+    router.go("Home Page");
+    countries.setCountries(response);
     countries.sortCountries();
     showCountries(countries.getCountriesByAmount("1"));
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
-    renderPageButtons(responseAll, pageNumbers);
-    firstPageBtn.classList.add("selected");
+    renderPageButtons(response, pageNumbers);
+    console.log(firstPageBtn);
+    firstPageBtn = document.querySelector(".listBtn");
+    firstPageBtn.classList.add("clickedDark", "clicked");
   } else {
-    const response = await findCountry(url);
+    const response = await findCountry(urlRegion);
     router.go(region);
     countries.setCountries(response);
     countries.sortCountries();
-    showCountries(countries.getCountriesByAmount("1").sort());
+    showCountries(countries.getCountriesByAmount("1"));
     pageNumbers.innerHTML = "";
     const liItems = document.querySelectorAll(".country__list__item");
     toggleLiBackgroundColor(liItems);
     renderPageButtons(response, pageNumbers);
+    firstPageBtn = document.querySelector('.listBtn')
     pageClickedHandler(firstPageBtn);
     firstPageBtn.classList.add("clickedDark", "clicked");
   }
@@ -107,24 +112,25 @@ countrySearch.addEventListener("input", async function () {
       countries.setCountries(searchedCountries);
       countries.sortCountries();
       countryList.innerHTML = "";
-      showCountries(countries.getCountriesByAmount("1").sort());
+      showCountries(countries.getCountriesByAmount("1"));
       const liItems = document.querySelectorAll(".country__list__item");
       toggleLiBackgroundColor(liItems);
       renderPageButtons(searchedCountries, pageNumbers);
-      const firstPageBtn = document.querySelector(".listBtn");
+      firstPageBtn = document.querySelector(".listBtn");
       firstPageBtn.classList.add("clickedDark", "clicked");
     }
     if (searchName.length < 1) {
       const urlAll = `${url}/all`;
       let searchedCountries = await findCountry(urlAll);
+
       countryList.innerHTML = "";
       countries.setCountries(searchedCountries);
       countries.sortCountries();
-      showCountries(countries.getCountriesByAmount("1").sort());
+      showCountries(countries.getCountriesByAmount("1"));
       const liItems = document.querySelectorAll(".country__list__item");
       toggleLiBackgroundColor(liItems);
       renderPageButtons(searchedCountries, pageNumbers);
-      const firstPageBtn = document.querySelector(".listBtn");
+      firstPageBtn = document.querySelector(".listBtn");
       firstPageBtn.classList.add("clickedDark", "clicked");
     }
   });

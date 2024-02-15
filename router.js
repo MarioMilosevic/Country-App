@@ -4,13 +4,14 @@ class Router {
   constructor() {}
 
   init() {
-    if (!window.location.href.includes("firstPage")) {
-      window.location.href = "firstPage";
-      console.log(history);
-      console.log(window.location);
-    } else {
-      return;
-    }
+    history.pushState({homePage: "Home Page"}, null, "/")
+    // if (!window.location.href.includes("firstPage")) {
+    //   window.location.href = "firstPage";
+    //   console.log(history);
+    //   console.log(window.location);
+    // } else {
+    //   return;
+    // }
   }
 
   go(route) {
