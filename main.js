@@ -75,11 +75,11 @@ countryList.addEventListener("click", (e) => showCountry(e));
 countryRegion.addEventListener("change", async () => {
   const region = countryRegion.value;
   countryList.innerHTML = "";
-  const urlAll = `${url}/all`;
-  const urlRegion = `${url}/region/${region}`;
+  let renderUrl;
   region === "All"
-    ? renderFetchedCountries(urlAll)
-    : renderFetchedCountries(urlRegion);
+    ? (renderUrl = `${url}/all`)
+    : (renderUrl = `${url}/region/${region}`);
+  renderFetchedCountries(renderUrl);
 });
 
 countrySearch.addEventListener("input", async function () {
@@ -117,7 +117,6 @@ brightness.addEventListener("click", function () {
   const renderedPageButtons = document.querySelectorAll(".listBtn");
   toggleAllPageNumbersColor(renderedPageButtons);
   const selectedPageBtn = document.querySelector(".clicked");
-  console.log(selectedPageBtn);
   darkMode.getDarkMode()
     ? lightElement(selectedPageBtn)
     : darkElement(selectedPageBtn);
